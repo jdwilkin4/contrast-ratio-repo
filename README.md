@@ -15,7 +15,7 @@ The app evaluates the readability of page content by comparing the text color wi
 3. Commit changes to your own branch.  
 `git commit -m "commit message"`
 4. Push your branch back up to github.  
-`git push -u branch_name` 
+`git push -u origin branch_name` 
 5. Submit a Pull request so that we can review your changes.  
 `click compare, leave a comment and click the create pull request button.` 
  
