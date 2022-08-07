@@ -8,6 +8,79 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <main>
+      <section class="primary">
+        <div class="container">
+          <h1 class="page-title">Contrast Ratio Calculator</h1>
+          <div class="row">
+            <div class="input-fields">
+              <div>
+                <label for="foreground-color">Foreground color</label>
+              </div>
+              <div class="input-items">
+                <div class="swatch-one"></div>
+                <input id="foreground-color" for="foreground-color" name="foreground-color" type="text" value="#000000" />
+              </div>
+            </div>
+            <div class="input-fields">
+              <div>
+                <label for="background-color">Background color</label>
+              </div>
+              <div class="input-items">
+                <div class="swatch-two"></div>
+                <input id="background-color" for="background-color" name="background-color" type="text" placeholder="Second color" />
+              </div>
+            </div>
+          </div>
+          <div class="result-row">
+            <div class="ratio-result">
+              <div>
+                <p>Contrast Ratio</p>
+                <p id="contrast-ratio-result" class="large"></p>
+              </div>
+            </div>
+            <div class="check-result">
+              <div>
+                <p>Small Text</p>
+                <div class="pass">Icon</div>
+                <div class="pass">Icon</div>
+              </div>
+            </div>
+            <div class="check-result">
+              <div>
+                <p>Large Text</p>
+                <div class="fail">Icon</div>
+                <div class="fail">Icon</div>
+              </div>
+            </div>
+            <div class="check-result">
+              <div>
+                <p>Graphics</p>
+                <div class="pass">Icon</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!--TODO: replace lorem ipsum with actual content-->
+      <section class="secondary">
+        <div class="container">
+          <h2>H2 Notes or "How-To-Use" section</h2>
+          <p>Custom color variables were added under the root element. I added section tags for the primary and secondary sections and moved the container div tag inside of each. I added a slight background color to the primary section. I also reduced the border of the pass/fail circles from 4px to 3px. And I gave the footer a slightly lighter color. Finally, I added styling for the input buttons and sized the swatch to match the input height.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt optio assumenda animi sint. Illo veritatis quos vitae quam provident accusamus. Atque dolor minus asperiores hic consequatur deserunt odit accusamus nisi repudiandae illum natus harum, temporibus mollitia eligendi pariatur molestiae dicta excepturi quo maxime! Mollitia excepturi libero autem molestiae quisquam adipisci.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt optio assumenda animi sint. Illo veritatis quos vitae quam provident accusamus. Atque dolor minus asperiores hic consequatur deserunt odit accusamus nisi repudiandae illum natus harum, temporibus mollitia eligendi pariatur molestiae dicta excepturi quo maxime! Mollitia excepturi libero autem molestiae quisquam adipisci.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy;</p>
+        <!--TODO: Use JavaScript to dynamically add the current year here-->
+      </div>
+    </footer>
+
     <script src="./index.js"></script>
   </body>
 </html>
