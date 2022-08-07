@@ -1,0 +1,129 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+section {
+  margin-bottom: 4rem;
+}
+
+p {
+  font-size: 1.25rem;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+}
+footer p {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 80%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0.25rem 0;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .result-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .ratio-result,
+  .check-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .ratio-result {
+    margin-right: 2rem;
+  }
+
+  .large {
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .input-items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .swatch-one,
+  .swatch-two {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 1rem;
+  }
+
+  .swatch-one {
+    background-color: blue;
+  }
+  .swatch-two {
+    background-color: red;
+  }
+
+  .pass,
+  .fail {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: 50%;
+  }
+
+  .pass {
+    border: 0.25em solid green;
+    color: green;
+  }
+
+  .fail {
+    border: 0.25em solid red;
+    color: red;
+  }
+
+  .input-fields {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .input-items {
+    align-self: center;
+  }
+}

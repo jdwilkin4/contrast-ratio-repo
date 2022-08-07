@@ -8,6 +8,75 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <main>
+      <div class="container">
+        <section class="primary">
+          <h1 class="page-title">Contrast Ratio Calculator</h1>
+          <div class="row">
+            <div class="input-fields">
+              <div class="form-item">
+                <label for="foreground">Foreground color</label>
+              </div>
+              <div class="input-items">
+                <div class="swatch-one"></div>
+                <input id="foreground" name="foreground" class="form-input" type="text" value="#000000" />
+              </div>
+            </div>
+            <div class="input-fields">
+              <div class="form-item">
+                <label for="background">Background color</label>
+              </div>
+              <div class="input-items">
+                <div class="swatch-two"></div>
+                <input id="background" name="background" class="form-input" type="text" placeholder="Second color" />
+              </div>
+            </div>
+          </div>
+          <div class="result-row">
+            <div class="ratio-result">
+              <div>
+                <p>Contrast Ratio</p>
+                <p class="large">4.51</p>
+              </div>
+            </div>
+            <div class="check-result">
+              <div>
+                <p>Small Text</p>
+                <div class="pass">Icon</div>
+                <div class="pass">Icon</div>
+              </div>
+            </div>
+            <div class="check-result">
+              <div>
+                <p>Large Text</p>
+                <div class="fail">Icon</div>
+                <div class="fail">Icon</div>
+              </div>
+            </div>
+            <div class="check-result">
+              <div>
+                <p>Graphics</p>
+                <div class="pass">Icon</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="secondary">
+          <h2>H2 Notes or "How-To-Use" section</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt optio assumenda animi sint. Illo veritatis quos vitae quam provident accusamus. Atque dolor minus asperiores hic consequatur deserunt odit accusamus nisi repudiandae illum natus harum, temporibus mollitia eligendi pariatur molestiae dicta excepturi quo maxime! Mollitia excepturi libero autem molestiae quisquam adipisci.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt optio assumenda animi sint. Illo veritatis quos vitae quam provident accusamus. Atque dolor minus asperiores hic consequatur deserunt odit accusamus nisi repudiandae illum natus harum, temporibus mollitia eligendi pariatur molestiae dicta excepturi quo maxime! Mollitia excepturi libero autem molestiae quisquam adipisci.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt optio assumenda animi sint. Illo veritatis quos vitae quam provident accusamus. Atque dolor minus asperiores hic consequatur deserunt odit accusamus nisi repudiandae illum natus harum, temporibus mollitia eligendi pariatur molestiae dicta excepturi quo maxime! Mollitia excepturi libero autem molestiae quisquam adipisci.</p>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2022</p>
+      </div>
+    </footer>
+
     <script src="./index.js"></script>
   </body>
 </html>
