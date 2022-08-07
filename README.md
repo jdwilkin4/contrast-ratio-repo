@@ -1,3 +1,8 @@
 # Contrast Ratio
 
-See description!
+## Features 
+
+### Tech Stack 
+HTML CSS VANILLA js 
+
+#### How to contribute 
