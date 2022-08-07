@@ -5,4 +5,4 @@
 ### Tech Stack 
 HTML CSS VANILLA js 
 
-#### How to contribute 
+### How to contribute: 
