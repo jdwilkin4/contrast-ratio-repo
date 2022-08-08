@@ -56,5 +56,5 @@ const giveRatio = () => {
     }
 }
 
-backgroundColor.oninput = giveRatio;
-foregroundColor.oninput = giveRatio;
+backgroundColor.oninput = giveRatio();
+foregroundColor.oninput = giveRatio();
