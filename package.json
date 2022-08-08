@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/DBenMoshe/contrast-ratio-repo/issues"
   },
-  "homepage": "https://github.com/DBenMoshe/contrast-ratio-repo#readme"
+  "homepage": "https://github.com/DBenMoshe/contrast-ratio-repo#readme",
+  "devDependencies": {
+    "prettier": "2.7.1"
+  }
 }
