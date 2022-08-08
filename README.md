@@ -1,6 +1,6 @@
 # CONTRAST RATIO APP
 ## Description
-The app evaluates the readability of page content by comparing the text color with the background color,this is done  by calculating the aspect ratio and comparing the result to w3c provided standards.
+The app evaluates the readability of page content by comparing the text color with the background color,this is done  by calculating the contrast ratio and comparing the result to w3c provided standards.
 ## Technology Stack
 * HTML
 * CSS
