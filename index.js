@@ -58,3 +58,17 @@ const twoHexesRatio = (color1, color2) => {
     }
     return ((lighterLum + 0.05) / (darkerLum + 0.05)).toFixed(2);
 }
+
+
+//HTML JS INTERACTION
+
+const giveRatio = () => {
+    let firstColor = document.getElementById("foreground-color").value;
+    let secondColor = document.getElementById("background-color").value;
+    //CHECK for valid input
+    //for now I am just checking length
+    if (firstColor.length === 7 &&
+        secondColor.length === 7 ){
+      document.getElementById("contrast-ratio-result").innerHTML = twoHexesRatio(firstColor, secondColor);
+    }
+}
