@@ -55,3 +55,6 @@ const giveRatio = () => {
       document.getElementById("contrast-ratio-result").innerHTML = twoHexesRatio(firstColor, secondColor);
     }
 }
+
+backgroundColor.oninput = giveRatio;
+foregroundColor.oninput = giveRatio;
