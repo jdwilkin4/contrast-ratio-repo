@@ -4,7 +4,7 @@
   "description": "This is an app that checks the color contrast for web accessibility.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "browser-sync start --server --files .",
     "prepare": "husky install"
   },
   "repository": {
@@ -25,5 +25,8 @@
   },
   "lint-staged": {
     "*.{js,css,md,html,json}": "prettier --write"
+  },
+  "dependencies": {
+    "browser-sync": "^2.27.10"
   }
 }
