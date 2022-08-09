@@ -4,10 +4,130 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The user inputs two colors and is shown the precise contrast between them"
+    />
     <title>Contrast ratio project</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <main>
+      <section class="primary">
+        <div class="container">
+          <h1 class="page-title">Contrast Ratio Calculator</h1>
+          <div class="inputs-row">
+            <div class="input-fields">
+              <div>
+                <label for="foreground-color">Foreground color</label>
+              </div>
+              <div class="input-items">
+                <div class="swatch-one"></div>
+                <input
+                  id="foreground-color"
+                  for="foreground-color"
+                  name="foreground-color"
+                  type="text"
+                />
+              </div>
+            </div>
+            <div class="input-fields">
+              <div>
+                <label for="background-color">Background color</label>
+              </div>
+              <div class="input-items">
+                <div class="swatch-two"></div>
+                <input
+                  id="background-color"
+                  for="background-color"
+                  name="background-color"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="result-row">
+            <div class="ratio-result">
+              <div>
+                <p>Contrast Ratio</p>
+                <p id="contrast-ratio-result" class="large"></p>
+              </div>
+            </div>
+            <div class="check-result">
+              <div>
+                <p>Small Text</p>
+                <div class="pass">Icon</div>
+                <div class="pass">Icon</div>
+              </div>
+            </div>
+            <div class="check-result">
+              <div>
+                <p>Large Text</p>
+                <div class="fail">Icon</div>
+                <div class="fail">Icon</div>
+              </div>
+            </div>
+            <div class="check-result">
+              <div>
+                <p>Graphics</p>
+                <div class="pass">Icon</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="secondary">
+        <div class="container">
+          <h2>How does it work?</h2>
+          <p>
+            Enter a foreground and background color in RGB hexadecimal format
+            (e.g., #000 or #FF00FF).
+            <br />
+            The Contrast Ratio Calculator will calculate the contrast, ranging
+            from 1 (no contrast) to 21 (black on white).
+          </p>
+          <h3>How much contrast do I need?</h3>
+          <p>
+            This tool follows the Web Content Accessibility Guidelines (WCAG),
+            which are a series of recommendations for making the web more
+            accessible.
+          </p>
+          <p>
+            Regarding colors, the standard defines two levels of contrast ratio:
+            AA (minimum contrast) and AAA (enhanced contrast).
+          </p>
+          <h4>AA level</h4>
+          <ul>
+            <li><strong>4.5:1</strong>: for normal text.</li>
+            <li><strong>3:1</strong>: for large text.</li>
+          </ul>
+          <p>
+            <small
+              >WCAG 2.1 requires a contrast ratio of at least 3:1 for graphics
+              and user interface components (such as form input borders).</small
+            >
+          </p>
+          <h4>AAA level</h4>
+          <ul>
+            <li><strong>7:1</strong>: for normal text.</li>
+            <li><strong>4.5:1</strong>: for large text.</li>
+          </ul>
+          <p>
+            Large text is defined as 14 point (typically 18.66px) and bold or
+            larger, or 18 point (typically 24px) or larger.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy;</p>
+        <!--TODO: Use JavaScript to dynamically add the current year here-->
+      </div>
+    </footer>
+
     <script src="./index.js"></script>
   </body>
 </html>
