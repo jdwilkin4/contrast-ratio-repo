@@ -1,3 +1,7 @@
+const foregroundColor = document.getElementById("foreground-color");
+const backgroundColor = document.getElementById("background-color");
+const ratioResult = document.getElementById("contrast-ratio-result");
+
 const hexToRGB = (hexColor) => {
     const R = parseInt(hexColor.slice(1, 3), 16);
     const G = parseInt(hexColor.slice(3, 5), 16);
@@ -48,13 +52,14 @@ const twoHexesRatio = (color1, color2) => {
 }
 
 const giveRatio = () => {
-    let firstColor = document.getElementById("foreground-color").value;
-    let secondColor = document.getElementById("background-color").value;    
+    let firstColor = foregroundColor.value;
+    let secondColor = backgroundColor.value;    
     if (firstColor.length === 7 &&
         secondColor.length === 7 ){
-      document.getElementById("contrast-ratio-result").innerHTML = twoHexesRatio(firstColor, secondColor);
+            ratioResult.innerHTML = twoHexesRatio(firstColor, secondColor);
     }
 }
 
-backgroundColor.oninput = giveRatio;
 foregroundColor.oninput = giveRatio;
+backgroundColor.oninput = giveRatio;
+
