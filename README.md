@@ -8,7 +8,7 @@ The app evaluates the readability of page content by comparing the text color wi
 
 - HTML
 - CSS
-- JAVSCRIPT
+- JAVASCRIPT
 
 ## How to contribute
 
