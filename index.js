@@ -9,6 +9,46 @@ const hexToRGB = (hexColor) => {
   return [R, G, B];
 };
 
+const hslToRGB = (hslColor) => {
+  const dataForCalculation = hslColor
+    .replace(/[\(\)\sA-Za-z%]/g, "")
+    .split(",")
+    .map((hslValue, index) => {
+      return index === 0 ? Number(hslValue) : Number(hslValue) / 100;
+    });
+  //console.log(dataForCalculation);
+  //C = (1 - |2L - 1|) * S
+  const Chroma =
+    (1 - Math.abs(2 * dataForCalculation[2] - 1)) * dataForCalculation[1];
+  const HuePrime = dataForCalculation[0] / 60;
+  //X = C * (1 |H' mod 2 - 1|)
+  const X = Chroma * (1 - Math.abs((HuePrime % 2) - 1));
+  //console.log(Chroma);
+  //console.log(HuePrime);
+  //console.log(X);
+  let RGBresult = [];
+  if (HuePrime <= 1) {
+    RGBresult = [Chroma, X, 0];
+  } else if (HuePrime > 1 && HuePrime <= 2) {
+    RGBresult = [X, Chroma, 0];
+  } else if (HuePrime > 2 && HuePrime <= 3) {
+    RGBresult = [0, Chroma, X];
+  } else if (HuePrime > 3 && HuePrime <= 4) {
+    RGBresult = [0, X, Chroma];
+  } else if (HuePrime > 4 && HuePrime <= 5) {
+    RGBresult = [X, 0, Chroma];
+  } else {
+    RGBresult = [Chroma, 0, X];
+  }
+  //console.log(RGBresult)
+  //m = L - (C / 2)
+  const adjustLightness = dataForCalculation[2] - Chroma / 2;
+  //console.log(adjustLightness);
+  return RGBresult.map((RGBvalue) =>
+    Math.round((RGBvalue + adjustLightness) * 255)
+  );
+};
+
 const getLuminance = (RGBarray) => {
   //convert 8bit colors to
   //RsRGB, GsRGB BsRGB
