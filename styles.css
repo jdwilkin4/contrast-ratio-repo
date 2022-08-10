@@ -114,6 +114,11 @@ footer p {
   text-align: center;
 }
 
+.ratio-result p,
+.check-result p {
+  font-size: 1.15rem;
+}
+
 .ratio-result {
   margin-right: 2rem;
 }
@@ -131,6 +136,10 @@ footer p {
   gap: 0.5rem;
   justify-content: center;
   align-items: flex-start;
+}
+
+.input-fields label {
+  font-size: 1.4rem;
 }
 
 .swatch-one,
