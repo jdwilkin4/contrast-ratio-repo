@@ -1,7 +1,5 @@
 # CONTRAST RATIO APP
 
-testBranch I want to push
-
 ## Description
 
 The app evaluates the readability of page content by comparing the text color with the background color,this is done by calculating the contrast ratio and comparing the result to w3c provided standards.
