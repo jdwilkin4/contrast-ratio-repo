@@ -1,5 +1,11 @@
 # CONTRAST RATIO APP
 
+## Prerequisites
+
+Install Node.js in order to have access to npm.
+
+[Click here to get info about downloading and installing Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
 ## Description
 
 The app evaluates the readability of page content by comparing the text color with the background color,this is done by calculating the contrast ratio and comparing the result to w3c provided standards.
