@@ -1,8 +1,8 @@
 const foregroundColor = document.getElementById("foreground-color");
 const backgroundColor = document.getElementById("background-color");
 const ratioResult = document.getElementById("contrast-ratio-result");
-const leftSwatch = document.getElementByClass("swatch-one");
-const rightSwatch = document.getElementByClass("swatch-two");
+const leftSwatch = document.getElementById("swatch-one");
+const rightSwatch = document.getElementById("swatch-two");
 
 const hexToRGB = (hexColor) => {
   const R = parseInt(hexColor.slice(1, 3), 16);
@@ -62,5 +62,19 @@ const giveRatio = () => {
 
 foregroundColor.oninput = giveRatio;
 backgroundColor.oninput = giveRatio;
+
+const showColor = () => {
+  let firstColor = foregroundColor.value;
+  let secondColor = backgroundColor.value;
+  if (firstColor.length === 7) {
+    leftSwatch.style.backgroundColor = firstColor;
+  }
+  if (secondColor.length === 7) {
+    rightSwatch.style.backgroundColor = secondColor;
+  }
+};
+
+foregroundColor.oninput = showColor;
+backgroundColor.oninput = showColor;
 
 document.querySelector("#copyright").innerText = new Date().getFullYear();
