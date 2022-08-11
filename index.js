@@ -1,6 +1,8 @@
 const foregroundColor = document.getElementById("foreground-color");
 const backgroundColor = document.getElementById("background-color");
 const ratioResult = document.getElementById("contrast-ratio-result");
+const leftSwatch = document.getElementByClass("swatch-one");
+const rightSwatch = document.getElementByClass("swatch-two");
 
 const hexToRGB = (hexColor) => {
   const R = parseInt(hexColor.slice(1, 3), 16);
