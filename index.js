@@ -60,3 +60,5 @@ const giveRatio = () => {
 
 foregroundColor.oninput = giveRatio;
 backgroundColor.oninput = giveRatio;
+
+document.querySelector("#copyright").innerText = new Date().getFullYear();
