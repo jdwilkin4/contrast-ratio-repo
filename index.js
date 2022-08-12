@@ -90,6 +90,21 @@ const twoHexesRatio = (color1, color2) => {
   return ((lighterLum + 0.05) / (darkerLum + 0.05)).toFixed(2);
 };
 
+const twoHSLRatio = (color1, color2) => {
+  // have many repetitions here and in twoHexesRatio
+  // not sure if I need to deal with it when working on 37
+  // plus spark07 is working on ratio for RGB at the moment
+  const HSLColor1 = hslToRGB(color1);
+  const HSLColor2 = hslToRGB(color2);
+  const color1Luminance = getLuminance(HSLColor1);
+  const color2Luminance = getLuminance(HSLColor2);
+  let [lighterLum, darkerLum] = [color1Luminance, color2Luminance];
+  if (darkerLum > lighterLum) {
+    [lighterLum, darkerLum] = [darkerLum, lighterLum];
+  }
+  return ((lighterLum + 0.05) / (darkerLum + 0.05)).toFixed(2);
+};
+
 const giveRatio = () => {
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
