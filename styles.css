@@ -26,10 +26,6 @@ body {
   color: var(--text-primary);
 }
 
-.letter-spacing {
-  letter-spacing: -0.045em;
-}
-
 section {
   margin-bottom: 4rem;
 }
@@ -56,10 +52,6 @@ footer p {
   text-align: center;
 }
 
-.primary {
-  background-color: var(--primary-section);
-}
-
 .container {
   width: 80%;
   max-width: 1100px;
@@ -67,6 +59,11 @@ footer p {
   padding: 0.25rem 0;
 }
 
+.primary {
+  background-color: var(--primary-section);
+}
+
+// Header text
 .page-title {
   font-size: 2rem;
   font-variation-settings: "wght" 900;
@@ -74,18 +71,16 @@ footer p {
   margin: 4rem 0 1.8rem 0;
 }
 
+.letter-spacing {
+  letter-spacing: -0.045em;
+}
+
 .description {
   color: var(--text-secondary);
   text-align: center;
 }
 
-.large {
-  font-weight: bold;
-  font-size: 2rem;
-  padding: 0;
-  margin: 0;
-}
-
+// input-row
 .inputs-row {
   display: flex;
   flex-direction: column;
@@ -93,37 +88,6 @@ footer p {
   justify-content: center;
   gap: 1rem;
   margin: 4rem 0 1rem 0;
-}
-
-.result-row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.ratio-result,
-.check-result {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.text-small {
-  font-size: 1.15rem;
-}
-
-.ratio-result {
-  margin-right: 2rem;
-}
-
-.input-items {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .input-fields {
@@ -137,6 +101,12 @@ footer p {
 
 .input-fields label {
   font-size: 1.4rem;
+}
+
+.input-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .swatch-one,
@@ -154,6 +124,45 @@ footer p {
 }
 .swatch-two {
   background-color: red;
+}
+
+// result-row and check-result
+.result-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.ratio-result,
+.check-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.ratio-result {
+  margin-right: 2rem;
+}
+
+.circle-block {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.text-small {
+  font-size: 1.15rem;
+}
+
+.large {
+  font-weight: bold;
+  font-size: 2rem;
+  padding: 0;
+  margin: 0;
 }
 
 .pass,
@@ -176,6 +185,7 @@ footer p {
   color: var(--fail-border);
 }
 
+// text section styling
 .secondary .container h2 {
   font-variation-settings: "wght" 800;
 }
@@ -221,11 +231,12 @@ small {
 @media (min-width: 768px) {
   .inputs-row {
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     gap: 1rem;
   }
 
-  .input-items {
+  .input-items,
+  .label {
     align-self: center;
   }
 }
