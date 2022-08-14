@@ -19,13 +19,19 @@ const rgbToRGB = (rgbColor) => {
   return [R, G, B];
 };
 
-// On -white- color background
+// Determine the equivalent opaque RGB color
+// for a given partially transparent RGB color against a white background
 const rgbaToCloseRGB = (rgbaColor) => {
   const bg = [255, 255, 255];
   [R, G, B, o] = rgbaColor
     .replace(/[^\d,.]/g, "")
     .split(",")
     .map((el) => parseFloat(el));
+  // Y = p * T + (1 - p) * B , where:
+  // p is the opacity of the top layer
+  // T is the rgb number of the top layer color
+  // B is the rgb number of the fully opaque bottom layer
+  // Y is the rgb number of the equivalent fully opaque color
   return [R, G, B].map((colFg, idx) =>
     Math.ceil(o * colFg + (1 - o) * bg[idx])
   );
@@ -103,7 +109,6 @@ const displayResult = () => {
   }
   // CASE two RGBAs
   else if (rgbaRegex.test(firstColor) && rgbaRegex.test(secondColor)) {
-    console.log(twoRgbasRatio(firstColor, secondColor));
     ratioResult.innerHTML = twoRgbasRatio(firstColor, secondColor);
   }
   // CASE two RGBs
