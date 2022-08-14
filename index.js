@@ -1,5 +1,7 @@
 const foregroundColor = document.getElementById("foreground-color");
 const backgroundColor = document.getElementById("background-color");
+const foregroundSwatch = document.getElementById("swatch-one");
+const backgroundSwatch = document.getElementById("swatch-two");
 const ratioResult = document.getElementById("contrast-ratio-result");
 
 const hexToRGB = (hexColor) => {
@@ -84,12 +86,17 @@ const twoRgbasRatio = (color1, color2) => {
   return calculateRatio(RGBColor1, RGBColor2);
 };
 
-const giveRatio = () => {
+const displayResult = () => {
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
   const rgbRegex = /^rgb.*/i;
   const rgbaRegex = /^rgba.*/i;
-
+  if (firstColor.length === 7) {
+    foregroundSwatch.style.backgroundColor = firstColor;
+  }
+  if (secondColor.length === 7) {
+    backgroundSwatch.style.backgroundColor = secondColor;
+  }
   // CASE two Hexes
   if (firstColor.length === 7 && secondColor.length === 7) {
     ratioResult.innerHTML = twoHexesRatio(firstColor, secondColor);
@@ -105,7 +112,7 @@ const giveRatio = () => {
   }
 };
 
-foregroundColor.oninput = giveRatio;
-backgroundColor.oninput = giveRatio;
+foregroundColor.oninput = displayResult;
+backgroundColor.oninput = displayResult;
 
 document.querySelector("#copyright").innerText = new Date().getFullYear();
