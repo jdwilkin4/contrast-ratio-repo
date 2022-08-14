@@ -151,9 +151,11 @@ footer p {
 /* Need to set the swatches with JS */
 .swatch-one {
   background-color: blue;
+  box-shadow: 0 0 4px;
 }
 .swatch-two {
   background-color: red;
+  box-shadow: 0 0 4px;
 }
 
 .pass,
