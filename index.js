@@ -9,6 +9,26 @@ const hexToRGB = (hexColor) => {
   return [R, G, B];
 };
 
+const rgbToRGB = (rgbColor) => {
+  [R, G, B] = rgbColor
+    .replace(/[^\d,]/g, "")
+    .split(",")
+    .map((el) => parseInt(el));
+  return [R, G, B];
+};
+
+// On -white- color background
+const rgbaToCloseRGB = (rgbaColor) => {
+  const bg = [255, 255, 255];
+  [R, G, B, o] = rgbaColor
+    .replace(/[^\d,.]/g, "")
+    .split(",")
+    .map((el) => parseFloat(el));
+  return [R, G, B].map((colFg, idx) =>
+    Math.ceil(o * colFg + (1 - o) * bg[idx])
+  );
+};
+
 const getLuminance = (RGBarray) => {
   //convert 8bit colors to
   //RsRGB, GsRGB BsRGB
@@ -35,26 +55,53 @@ const getLuminance = (RGBarray) => {
   return luminance;
 };
 
-const twoHexesRatio = (color1, color2) => {
-  const RGBColor1 = hexToRGB(color1);
-  const RGBColor2 = hexToRGB(color2);
-  const color1Luminance = getLuminance(RGBColor1);
-  const color2Luminance = getLuminance(RGBColor2);
+const calculateRatio = (color1, color2) => {
+  const color1Luminance = getLuminance(color1);
+  const color2Luminance = getLuminance(color2);
   /* (L1 + 0.05) / (L2 + 0.05), whereby:
     L1 is the relative luminance of the lighter of the colors, and
     L2 is the relative luminance of the darker of the colors. */
-  let [lighterLum, darkerLum] = [color1Luminance, color2Luminance];
-  if (darkerLum > lighterLum) {
-    [lighterLum, darkerLum] = [darkerLum, lighterLum];
-  }
+  let lighterLum = Math.max(color1Luminance, color2Luminance);
+  let darkerLum = Math.min(color1Luminance, color2Luminance);
   return ((lighterLum + 0.05) / (darkerLum + 0.05)).toFixed(2);
+};
+
+const twoHexesRatio = (color1, color2) => {
+  const RGBColor1 = hexToRGB(color1);
+  const RGBColor2 = hexToRGB(color2);
+  return calculateRatio(RGBColor1, RGBColor2);
+};
+
+const twoRgbsRatio = (color1, color2) => {
+  const RGBColor1 = rgbToRGB(color1);
+  const RGBColor2 = rgbToRGB(color2);
+  return calculateRatio(RGBColor1, RGBColor2);
+};
+
+const twoRgbasRatio = (color1, color2) => {
+  const RGBColor1 = rgbaToCloseRGB(color1);
+  const RGBColor2 = rgbaToCloseRGB(color2);
+  return calculateRatio(RGBColor1, RGBColor2);
 };
 
 const giveRatio = () => {
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
+  const rgbRegex = /^rgb.*/i;
+  const rgbaRegex = /^rgba.*/i;
+
+  // CASE two Hexes
   if (firstColor.length === 7 && secondColor.length === 7) {
     ratioResult.innerHTML = twoHexesRatio(firstColor, secondColor);
+  }
+  // CASE two RGBAs
+  else if (rgbaRegex.test(firstColor) && rgbaRegex.test(secondColor)) {
+    console.log(twoRgbasRatio(firstColor, secondColor));
+    ratioResult.innerHTML = twoRgbasRatio(firstColor, secondColor);
+  }
+  // CASE two RGBs
+  else if (rgbRegex.test(firstColor) && rgbRegex.test(secondColor)) {
+    ratioResult.innerHTML = twoRgbsRatio(firstColor, secondColor);
   }
 };
 
