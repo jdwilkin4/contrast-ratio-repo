@@ -208,6 +208,15 @@ small {
   font-size: 0.9em;
 }
 
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  top: auto;
+  overflow: hidden;
+}
+
 @media (min-width: 601px) {
   .page-title {
     font-size: 2.9rem;
