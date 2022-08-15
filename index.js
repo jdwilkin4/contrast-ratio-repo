@@ -11,11 +11,11 @@ const hexToRGB = (hexColor) => {
   return [R, G, B];
 };
 
-const rgbToRGB = (rgbColor) => {
+const rgbInputToRGBNumbers = (rgbColor) => {
   [R, G, B] = rgbColor
     .replace(/[^\d,]/g, "")
     .split(",")
-    .map((el) => parseInt(el));
+    .map((RGBValue) => parseInt(RGBValue));
   return [R, G, B];
 };
 
@@ -74,21 +74,9 @@ const calculateRatio = (color1, color2) => {
   return ((lighterLum + 0.05) / (darkerLum + 0.05)).toFixed(2);
 };
 
-const twoHexesRatio = (color1, color2) => {
-  const RGBColor1 = hexToRGB(color1);
-  const RGBColor2 = hexToRGB(color2);
-  return calculateRatio(RGBColor1, RGBColor2);
-};
-
-const twoRgbsRatio = (color1, color2) => {
-  const RGBColor1 = rgbToRGB(color1);
-  const RGBColor2 = rgbToRGB(color2);
-  return calculateRatio(RGBColor1, RGBColor2);
-};
-
-const twoRgbasRatio = (color1, color2) => {
-  const RGBColor1 = rgbaToCloseRGB(color1);
-  const RGBColor2 = rgbaToCloseRGB(color2);
+const colorFormatRatio = (color1, color2, convertRatio) => {
+  const RGBColor1 = convertRatio(color1);
+  const RGBColor2 = convertRatio(color2);
   return calculateRatio(RGBColor1, RGBColor2);
 };
 
@@ -97,23 +85,39 @@ const displayResult = () => {
   let secondColor = backgroundColor.value;
   const rgbRegex = /^rgb.*/i;
   const rgbaRegex = /^rgba.*/i;
-  if (firstColor.length === 7) {
+  if (
+    firstColor.length === 7 ||
+    rgbRegex.test(firstColor) ||
+    rgbaRegex.test(firstColor)
+  ) {
     foregroundSwatch.style.backgroundColor = firstColor;
   }
-  if (secondColor.length === 7) {
+  if (
+    secondColor.length === 7 ||
+    rgbRegex.test(secondColor) ||
+    rgbaRegex.test(secondColor)
+  ) {
     backgroundSwatch.style.backgroundColor = secondColor;
   }
   // CASE two Hexes
   if (firstColor.length === 7 && secondColor.length === 7) {
-    ratioResult.innerHTML = twoHexesRatio(firstColor, secondColor);
+    ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hexToRGB);
   }
   // CASE two RGBAs
   else if (rgbaRegex.test(firstColor) && rgbaRegex.test(secondColor)) {
-    ratioResult.innerHTML = twoRgbasRatio(firstColor, secondColor);
+    ratioResult.innerHTML = colorFormatRatio(
+      firstColor,
+      secondColor,
+      rgbaToCloseRGB
+    );
   }
   // CASE two RGBs
   else if (rgbRegex.test(firstColor) && rgbRegex.test(secondColor)) {
-    ratioResult.innerHTML = twoRgbsRatio(firstColor, secondColor);
+    ratioResult.innerHTML = colorFormatRatio(
+      firstColor,
+      secondColor,
+      rgbInputToRGBNumbers
+    );
   }
 };
 
