@@ -173,10 +173,6 @@ const displayResult = () => {
       rgbInputToRGBNumbers
     );
   }
-  //CASE two HSLs
-  else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
-    ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
-  }
   //CASE two HSLAs
   else if (hslaRegex.test(firstColor) && hslaRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(
@@ -184,6 +180,10 @@ const displayResult = () => {
       secondColor,
       hslaToCloseRGB
     );
+  }
+  //CASE two HSLs
+  else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
+    ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
   }
 };
 
