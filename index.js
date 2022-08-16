@@ -77,6 +77,14 @@ const rgbaToCloseRGB = (rgbaColor) => {
   );
 };
 
+const hslaToCloseRGB = (hslaColor) => {
+  const formattedHSLA = hslaColor.replace(/[\(\)\sA-Za-z%]/g, "").split(",");
+  const opacity = formattedHSLA.pop();
+  const hslaToRGBA =
+    hslToRGB(formattedHSLA.join(",")).join(",") + `,${opacity}`;
+  return rgbaToCloseRGB(hslaToRGBA);
+};
+
 const getLuminance = (RGBarray) => {
   //convert 8bit colors to
   //RsRGB, GsRGB BsRGB
@@ -166,6 +174,9 @@ const displayResult = () => {
   //CASE two HSLs
   else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
+  }
+  //CASE two HSLas
+  else if (hslaRegex.test(firstColor) && hslaRegex.test(secondColor)) {
   }
 };
 
