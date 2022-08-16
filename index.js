@@ -139,7 +139,8 @@ const displayResult = () => {
     firstColor.length === 7 ||
     rgbRegex.test(firstColor) ||
     rgbaRegex.test(firstColor) ||
-    hslRegex.test(firstColor)
+    hslRegex.test(firstColor) ||
+    hslaRegex.test(firstColor)
   ) {
     foregroundSwatch.style.backgroundColor = firstColor;
   }
@@ -147,7 +148,8 @@ const displayResult = () => {
     secondColor.length === 7 ||
     rgbRegex.test(secondColor) ||
     rgbaRegex.test(secondColor) ||
-    hslRegex.test(secondColor)
+    hslRegex.test(secondColor) ||
+    hslaRegex.test(secondColor)
   ) {
     backgroundSwatch.style.backgroundColor = secondColor;
   }
@@ -175,8 +177,13 @@ const displayResult = () => {
   else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
   }
-  //CASE two HSLas
+  //CASE two HSLAs
   else if (hslaRegex.test(firstColor) && hslaRegex.test(secondColor)) {
+    ratioResult.innerHTML = colorFormatRatio(
+      firstColor,
+      secondColor,
+      hslaToCloseRGB
+    );
   }
 };
 
