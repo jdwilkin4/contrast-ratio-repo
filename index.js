@@ -136,9 +136,10 @@ const colorFormatRatio = (color1, color2, convertRatio) => {
 const displayResult = () => {
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
-  //CASE two hexes
   const rgbRegex = /^rgb.*/i;
   const rgbaRegex = /^rgba.*/i;
+  const hslRegex = /^hsl.*/i;
+  const hslaRegex = /^hsla.*/i;
   if (
     firstColor.length === 7 ||
     rgbRegex.test(firstColor) ||
@@ -173,11 +174,8 @@ const displayResult = () => {
       rgbInputToRGBNumbers
     );
   }
-  //CASE two hsl
-  else if (
-    firstColor.trim().substring(0, 3) === "hsl" &&
-    secondColor.trim().substring(0, 3) === "hsl"
-  ) {
+  //CASE two HSLs
+  else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
     ratioResult.innerHTML = twoHSLRatio(firstColor, secondColor);
   }
 };
