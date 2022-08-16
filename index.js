@@ -176,7 +176,7 @@ const displayResult = () => {
   }
   //CASE two HSLs
   else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
-    ratioResult.innerHTML = twoHSLRatio(firstColor, secondColor);
+    ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
   }
 };
 
