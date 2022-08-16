@@ -18,18 +18,15 @@ The app evaluates the readability of page content by comparing the text color wi
 
 ## How to contribute
 
-1. Clone the project to your own machine.
-   `git clone url`
-2. Create a branch.
-   `git checkout -b branch_name`
-3. Stage changes.
-   `git add file_name`
-4. Commit changes to your own branch.
-   `git commit -m "commit message"`
-5. Push your branch back up to github.
-   `git push -u origin branch_name`
-6. Submit a Pull request so that we can review your changes.
-   `click compare, leave a comment and click the create pull request button.`
+1.  Fork the repo ([How to fork a repo instructions](https://docs.github.com/en/get-started/quickstart/fork-a-repo))
+2.  Clone the repo to your local machine. `git clone https://github.com/GITHUB-USERNAME-GOES-HERE/contrast-ratio-repo.git`
+3.  Change directories to the contrast ratio repo `cd contrast-ratio-repo`
+4.  Create a branch and switch to that new branch. `git checkout -b new-branch-name`
+5.  Make some changes to the project
+6.  Stage changes. `git add .`
+7.  Commit changes to your local branch. `git commit -m "commit message"`
+8.  Push up your local branch and create a remote branch on GitHub `git push -u origin branch_name`
+9.  Submit a Pull request so that we can review your changes. click compare, leave a comment and click the create pull request button.
 
 ## How to install the dependencies
 
