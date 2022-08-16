@@ -130,14 +130,16 @@ const displayResult = () => {
   if (
     firstColor.length === 7 ||
     rgbRegex.test(firstColor) ||
-    rgbaRegex.test(firstColor)
+    rgbaRegex.test(firstColor) ||
+    hslRegex.test(firstColor)
   ) {
     foregroundSwatch.style.backgroundColor = firstColor;
   }
   if (
     secondColor.length === 7 ||
     rgbRegex.test(secondColor) ||
-    rgbaRegex.test(secondColor)
+    rgbaRegex.test(secondColor) ||
+    hslRegex.test(secondColor)
   ) {
     backgroundSwatch.style.backgroundColor = secondColor;
   }
