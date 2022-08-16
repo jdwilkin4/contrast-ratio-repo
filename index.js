@@ -114,19 +114,6 @@ const calculateRatio = (color1, color2) => {
   return ((lighterLum + 0.05) / (darkerLum + 0.05)).toFixed(2);
 };
 
-const twoHSLRatio = (color1, color2) => {
-  // have many repetitions here and in twoHexesRatio
-  const HSLColor1 = hslToRGB(color1);
-  const HSLColor2 = hslToRGB(color2);
-  const color1Luminance = getLuminance(HSLColor1);
-  const color2Luminance = getLuminance(HSLColor2);
-  let [lighterLum, darkerLum] = [color1Luminance, color2Luminance];
-  if (darkerLum > lighterLum) {
-    [lighterLum, darkerLum] = [darkerLum, lighterLum];
-  }
-  return ((lighterLum + 0.05) / (darkerLum + 0.05)).toFixed(2);
-};
-
 const colorFormatRatio = (color1, color2, convertRatio) => {
   const RGBColor1 = convertRatio(color1);
   const RGBColor2 = convertRatio(color2);
