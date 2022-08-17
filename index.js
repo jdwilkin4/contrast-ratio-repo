@@ -3,6 +3,7 @@ const backgroundColor = document.getElementById("background-color");
 const foregroundSwatch = document.getElementById("swatch-one");
 const backgroundSwatch = document.getElementById("swatch-two");
 const ratioResult = document.getElementById("contrast-ratio-result");
+const errorMessage = document.querySelector(".error-message")
 
 const hexToRGB = (hexColor) => {
   const R = parseInt(hexColor.slice(1, 3), 16);
@@ -85,6 +86,17 @@ const displayResult = () => {
   let secondColor = backgroundColor.value;
   const rgbRegex = /^rgb.*/i;
   const rgbaRegex = /^rgba.*/i;
+  const validInputRegex = /^#([A-Za-z0-9]{3})$|^#([A-Za-z0-9]{6})$|^((hsla)|(hsl))\((\d{1,3},\s?\d{1,3}\%,\s?\d{1,3}\%)\)?(,\s\d.?\d?)?\)|^((rgb)|(rgba))\(\d{1,3},\s?\d{1,3},\s?\d{1,3}\)?(,\d.?\d?)?\)/;
+  if(firstColor != "" && secondColor != "") {
+    if(validInputRegex.test(firstColor) && validInputRegex.test(secondColor)){
+      //We can probably move the color decisions below into this section.;
+      errorMessage.style.display = "none";
+    }else{
+    errorMessage.style.display = "block";
+    }
+  }else{
+    errorMessage.style.display = "none";
+  }
   if (
     firstColor.length === 7 ||
     rgbRegex.test(firstColor) ||

@@ -79,6 +79,9 @@ footer p {
   text-align: center;
 }
 
+.error-message {
+  display: none;
+}
 .large {
   font-weight: bold;
   font-size: 2rem;
