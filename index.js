@@ -11,6 +11,46 @@ const hexToRGB = (hexColor) => {
   return [R, G, B];
 };
 
+const hslToRGB = (hslColor) => {
+  const dataForCalculation = hslColor
+    .replace(/[\(\)\sA-Za-z%]/g, "")
+    .split(",")
+    .map((hslValue, index) => {
+      return index === 0 ? Number(hslValue) : Number(hslValue) / 100;
+    });
+  //console.log(dataForCalculation);
+  //C = (1 - |2L - 1|) * S
+  const Chroma =
+    (1 - Math.abs(2 * dataForCalculation[2] - 1)) * dataForCalculation[1];
+  const HuePrime = dataForCalculation[0] / 60;
+  //X = C * (1 |H' mod 2 - 1|)
+  const X = Chroma * (1 - Math.abs((HuePrime % 2) - 1));
+  //console.log(Chroma);
+  //console.log(HuePrime);
+  //console.log(X);
+  let RGBresult = [];
+  if (HuePrime <= 1) {
+    RGBresult = [Chroma, X, 0];
+  } else if (HuePrime > 1 && HuePrime <= 2) {
+    RGBresult = [X, Chroma, 0];
+  } else if (HuePrime > 2 && HuePrime <= 3) {
+    RGBresult = [0, Chroma, X];
+  } else if (HuePrime > 3 && HuePrime <= 4) {
+    RGBresult = [0, X, Chroma];
+  } else if (HuePrime > 4 && HuePrime <= 5) {
+    RGBresult = [X, 0, Chroma];
+  } else {
+    RGBresult = [Chroma, 0, X];
+  }
+  //console.log(RGBresult)
+  //m = L - (C / 2)
+  const adjustLightness = dataForCalculation[2] - Chroma / 2;
+  //console.log(adjustLightness);
+  return RGBresult.map((RGBvalue) =>
+    Math.round((RGBvalue + adjustLightness) * 255)
+  );
+};
+
 const rgbInputToRGBNumbers = (rgbColor) => {
   [R, G, B] = rgbColor
     .replace(/[^\d,]/g, "")
@@ -35,6 +75,14 @@ const rgbaToCloseRGB = (rgbaColor) => {
   return [R, G, B].map((colFg, idx) =>
     Math.ceil(o * colFg + (1 - o) * bg[idx])
   );
+};
+
+const hslaToCloseRGB = (hslaColor) => {
+  const formattedHSLA = hslaColor.replace(/[\(\)\sA-Za-z%]/g, "").split(",");
+  const opacity = formattedHSLA.pop();
+  const hslaToRGBA =
+    hslToRGB(formattedHSLA.join(",")).join(",") + `,${opacity}`;
+  return rgbaToCloseRGB(hslaToRGBA);
 };
 
 const getLuminance = (RGBarray) => {
@@ -85,17 +133,23 @@ const displayResult = () => {
   let secondColor = backgroundColor.value;
   const rgbRegex = /^rgb.*/i;
   const rgbaRegex = /^rgba.*/i;
+  const hslRegex = /^hsl.*/i;
+  const hslaRegex = /^hsla.*/i;
   if (
     firstColor.length === 7 ||
     rgbRegex.test(firstColor) ||
-    rgbaRegex.test(firstColor)
+    rgbaRegex.test(firstColor) ||
+    hslRegex.test(firstColor) ||
+    hslaRegex.test(firstColor)
   ) {
     foregroundSwatch.style.backgroundColor = firstColor;
   }
   if (
     secondColor.length === 7 ||
     rgbRegex.test(secondColor) ||
-    rgbaRegex.test(secondColor)
+    rgbaRegex.test(secondColor) ||
+    hslRegex.test(secondColor) ||
+    hslaRegex.test(secondColor)
   ) {
     backgroundSwatch.style.backgroundColor = secondColor;
   }
@@ -118,6 +172,18 @@ const displayResult = () => {
       secondColor,
       rgbInputToRGBNumbers
     );
+  }
+  //CASE two HSLAs
+  else if (hslaRegex.test(firstColor) && hslaRegex.test(secondColor)) {
+    ratioResult.innerHTML = colorFormatRatio(
+      firstColor,
+      secondColor,
+      hslaToCloseRGB
+    );
+  }
+  //CASE two HSLs
+  else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
+    ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
   }
 };
 
