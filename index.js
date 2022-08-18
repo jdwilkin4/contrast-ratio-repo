@@ -3,7 +3,6 @@ const backgroundColor = document.getElementById("background-color");
 const foregroundSwatch = document.getElementById("swatch-one");
 const backgroundSwatch = document.getElementById("swatch-two");
 const ratioResult = document.getElementById("contrast-ratio-result");
-
 const hexToRGB = (hexColor) => {
   const R = parseInt(hexColor.slice(1, 3), 16);
   const G = parseInt(hexColor.slice(3, 5), 16);
