@@ -79,6 +79,10 @@ footer p {
   text-align: center;
 }
 
+.error-message :first-child{
+  margin-bottom: -10px;
+  margin-top: -10px;
+}
 .large {
   font-weight: bold;
   font-size: 2rem;

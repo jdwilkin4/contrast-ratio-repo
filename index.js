@@ -3,7 +3,6 @@ const backgroundColor = document.getElementById("background-color");
 const foregroundSwatch = document.getElementById("swatch-one");
 const backgroundSwatch = document.getElementById("swatch-two");
 const ratioResult = document.getElementById("contrast-ratio-result");
-
 const hexToRGB = (hexColor) => {
   const R = parseInt(hexColor.slice(1, 3), 16);
   const G = parseInt(hexColor.slice(3, 5), 16);
@@ -133,6 +132,7 @@ const displayResult = () => {
   let secondColor = backgroundColor.value;
   const rgbRegex = /^rgb.*/i;
   const rgbaRegex = /^rgba.*/i;
+  const hexRegex = /^#([A-Fa-f0-9]{6})$/;
   const hslRegex = /^hsl.*/i;
   const hslaRegex = /^hsla.*/i;
   if (
@@ -155,10 +155,28 @@ const displayResult = () => {
   }
   // CASE two Hexes
   if (firstColor.length === 7 && secondColor.length === 7) {
-    ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hexToRGB);
+    if (hexRegex.test(firstColor) && hexRegex.test(secondColor)) {
+      ratioResult.innerHTML = colorFormatRatio(
+        firstColor,
+        secondColor,
+        hexToRGB
+      );
+    }
+  }
+  if (firstColor.length >= 7 && secondColor.length >= 7) {
+    if (!hexRegex.test(firstColor) || !hexRegex.test(secondColor)) {
+      ratioResult.innerHTML = `
+        <div class = "error-message">
+          <h3>Invalid Input</h3>
+          <p>The following format is supported. Hexadecimal (e.g #000000, #f1f1f1)</p>
+        </div>`;
+    }
+  } else if (firstColor.length < 7 || secondColor.length < 7) {
+    ratioResult.innerHTML = "";
   }
   // CASE two RGBAs
-  else if (rgbaRegex.test(firstColor) && rgbaRegex.test(secondColor)) {
+  //changed else if to if for two rgba
+  if (rgbaRegex.test(firstColor) && rgbaRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(
       firstColor,
       secondColor,
