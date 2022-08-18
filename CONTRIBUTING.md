@@ -18,11 +18,11 @@ To get an overview of the project, please read the [README](./README.md).
 
 ### Issues
 
-#### Create a new issue
+#### _Create a new issue_
 
-If you spot a problem with the docs, search if an issue already exists. If a related issue doesn't exist, you can open a [new issue](https://github.com/DBenMoshe/contrast-ratio-repo/issues/new).
+If you spot a problem with our codebase, search if an issue already exists. If a related issue doesn't exist, you can open a [new issue](https://github.com/DBenMoshe/contrast-ratio-repo/issues/new).
 
-#### Solve an issue
+#### _Solve an issue_
 
 Scan through our [existing issues](https://github.com/DBenMoshe/contrast-ratio-repo/issues) to find one that interests you. You can narrow down the search using `labels` as filters. See [Labels](https://github.com/DBenMoshe/contrast-ratio-repo/labels) for more information. As a general rule, we don’t assign issues to anyone. If you find an issue to work on, you are welcome to open a PR with a fix.
 
@@ -32,7 +32,7 @@ If you are looking to make your first contribution, follow the steps below.
 
 If you don't have git on your machine, [install it](https://help.github.com/articles/set-up-git/).
 
-#### Fork this repository
+#### _Fork this repository_
 
 Fork this repository by clicking on the fork button on the top of this page.
 This will create a copy of this repository in your account.
@@ -41,7 +41,7 @@ This will create a copy of this repository in your account.
   - [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/getting-started-with-github-desktop) will guide you through setting up Desktop.
   - Once Desktop is set up, you can use it to [fork the repo](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/cloning-and-forking-repositories-from-github-desktop)!
 
-#### Clone the repository
+#### _Clone the repository_
 
 Now clone the forked repository to your machine. Go to your GitHub account, open the forked repository, click on the code button and then click the copy to clipboard icon.
 
@@ -53,11 +53,11 @@ git clone url-you-just-copied
 
 where `url-you-just-copied` is the url to this repository (your fork of this project).
 
-#### Install or update to **Node.js v16**
+#### \*Install or update to **Node.js v16\***
 
 Then read our [README](./README.md) on how to install dependencies.
 
-#### Create a working branch and start with your changes!
+#### _Create a working branch and start with your changes!_
 
 Change to the contrast ratio repo directory on your computer (if you are not already there):
 
