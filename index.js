@@ -135,12 +135,14 @@ const displayResult = () => {
   const hexRegex = /^#([A-Fa-f0-9]{6})$/;
   const hslRegex = /^hsl.*/i;
   const hslaRegex = /^hsla.*/i;
+  const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
   if (
     firstColor.length === 7 ||
     rgbRegex.test(firstColor) ||
     rgbaRegex.test(firstColor) ||
     hslRegex.test(firstColor) ||
-    hslaRegex.test(firstColor)
+    hslaRegex.test(firstColor) ||
+    hexRegex3Digit.test(firstColor)
   ) {
     foregroundSwatch.style.backgroundColor = firstColor;
   }
@@ -149,7 +151,8 @@ const displayResult = () => {
     rgbRegex.test(secondColor) ||
     rgbaRegex.test(secondColor) ||
     hslRegex.test(secondColor) ||
-    hslaRegex.test(secondColor)
+    hslaRegex.test(secondColor) ||
+    hexRegex3Digit.test(secondColor)
   ) {
     backgroundSwatch.style.backgroundColor = secondColor;
   }
@@ -173,6 +176,15 @@ const displayResult = () => {
     }
   } else if (firstColor.length < 7 || secondColor.length < 7) {
     ratioResult.innerHTML = "";
+  }
+  if(hexRegex3Digit.test(firstColor) && hexRegex3Digit.test(secondColor)) {
+    firstColor = [...firstColor].map((x, index) => (index != 0) ? x + x: x).join("");
+    secondColor = [...secondColor].map((x, index) => (index != 0) ? x + x: x).join("");
+    ratioResult.innerHTML = colorFormatRatio(
+      firstColor,
+      secondColor,
+      hexToRGB
+    );
   }
   // CASE two RGBAs
   //changed else if to if for two rgba
