@@ -67,11 +67,15 @@ footer p {
   padding: 0.25rem 0;
 }
 
+.heading {
+  margin: 3rem 0;
+}
+
 .page-title {
   font-size: 2rem;
   font-variation-settings: "wght" 900;
   text-align: center;
-  margin: 4rem 0 1.8rem 0;
+  margin-bottom: 1rem;
 }
 
 .description {
@@ -79,7 +83,7 @@ footer p {
   text-align: center;
 }
 
-.error-message :first-child{
+.error-message :first-child {
   margin-bottom: -10px;
   margin-top: -10px;
 }
