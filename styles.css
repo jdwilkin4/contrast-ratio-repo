@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800;900&display=optional");
 
 *,
 *::before,
@@ -79,7 +79,7 @@ footer p {
   text-align: center;
 }
 
-.error-message :first-child{
+.error-message :first-child {
   margin-bottom: -10px;
   margin-top: -10px;
 }
