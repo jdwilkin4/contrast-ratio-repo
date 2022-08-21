@@ -11,10 +11,11 @@
   --text-secondary: #7a7a7a;
   --text-light: #fff;
   --primary-section: #f3f5f3;
-  --input-border: #888;
+  --input-border: #d8d8da;
   --pass-border: #008000;
   --fail-border: #ff0000;
   --footer-bg: #555;
+  --swatch-border: #000;
 }
 
 body {
@@ -44,7 +45,8 @@ input {
   width: 15rem;
   height: 1.75rem;
   border-radius: 0.375rem;
-  border: 2px solid var(--input-border);
+  border: none;
+  background-color: var(--primary-section);
 }
 
 footer {
@@ -132,6 +134,10 @@ footer p {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid var(--input-border);
+  padding: 0.5rem;
+  border-radius: 10px;
+  margin: 0.3rem 0;
 }
 
 .input-fields {
@@ -152,18 +158,17 @@ footer p {
   display: inline-block;
   width: 2.25rem;
   height: 2.25rem;
-  margin-right: 0.5rem;
   border-radius: 0.375rem;
+  box-shadow: inset var(--swatch-border) 0 0 0 1px;
+  margin: 0.2rem;
 }
 
 /* Need to set the swatches with JS */
 .swatch-one {
-  background-color: blue;
-  box-shadow: 0 0 4px;
+  background-color: white;
 }
 .swatch-two {
-  background-color: red;
-  box-shadow: 0 0 4px;
+  background-color: black;
 }
 
 .pass,
