@@ -126,7 +126,9 @@ const colorFormatRatio = (color1, color2, convertRatio) => {
   const RGBColor2 = convertRatio(color2);
   return calculateRatio(RGBColor1, RGBColor2);
 };
-
+const shortToFullHex = (hexColor) => {
+  return [...hexColor].map((x, index) => (index != 0) ? x + x: x).join("");
+}
 const displayResult = () => {
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
@@ -178,11 +180,9 @@ const displayResult = () => {
     ratioResult.innerHTML = "";
   }
   if(hexRegex3Digit.test(firstColor) && hexRegex3Digit.test(secondColor)) {
-    firstColor = [...firstColor].map((x, index) => (index != 0) ? x + x: x).join("");
-    secondColor = [...secondColor].map((x, index) => (index != 0) ? x + x: x).join("");
     ratioResult.innerHTML = colorFormatRatio(
-      firstColor,
-      secondColor,
+      shortToFullHex(firstColor),
+      shortToFullHex(secondColor),
       hexToRGB
     );
   }
