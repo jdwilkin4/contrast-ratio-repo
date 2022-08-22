@@ -38,6 +38,13 @@ p {
   font-size: 1.25rem;
 }
 
+.result-field {
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  margin: 2rem 0;
+  padding: 2rem;
+}
+
 input {
   font-size: 1.125rem;
   padding: 1rem;
@@ -79,10 +86,11 @@ footer p {
   text-align: center;
 }
 
-.error-message :first-child{
+.error-message :first-child {
   margin-bottom: -10px;
   margin-top: -10px;
 }
+
 .large {
   font-weight: bold;
   font-size: 2rem;
@@ -96,7 +104,7 @@ footer p {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  margin: 4rem 0 1rem 0;
+  margin: 0.5rem 0;
 }
 
 .result-row {
@@ -104,7 +112,7 @@ footer p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2rem 0 0 0;
 }
 
 .ratio-result,
@@ -157,6 +165,7 @@ footer p {
   background-color: blue;
   box-shadow: 0 0 4px;
 }
+
 .swatch-two {
   background-color: red;
   box-shadow: 0 0 4px;
@@ -188,10 +197,6 @@ footer p {
 
 .secondary .container h3 {
   font-variation-settings: "wght" 650;
-}
-
-.secondary .container h4 {
-  font-variation-settings: "wght" 700;
 }
 
 .secondary .container p {
