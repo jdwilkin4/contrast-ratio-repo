@@ -126,7 +126,9 @@ const colorFormatRatio = (color1, color2, convertRatio) => {
   const RGBColor2 = convertRatio(color2);
   return calculateRatio(RGBColor1, RGBColor2);
 };
-
+const shortToFullHex = (hexColor) => {
+  return [...hexColor].map((x, index) => (index != 0) ? x + x: x).join("");
+}
 const displayResult = () => {
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
@@ -135,12 +137,14 @@ const displayResult = () => {
   const hexRegex = /^#([A-Fa-f0-9]{6})$/;
   const hslRegex = /^hsl.*/i;
   const hslaRegex = /^hsla.*/i;
+  const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
   if (
     firstColor.length === 7 ||
     rgbRegex.test(firstColor) ||
     rgbaRegex.test(firstColor) ||
     hslRegex.test(firstColor) ||
-    hslaRegex.test(firstColor)
+    hslaRegex.test(firstColor) ||
+    hexRegex3Digit.test(firstColor)
   ) {
     foregroundSwatch.style.backgroundColor = firstColor;
   }
@@ -149,7 +153,8 @@ const displayResult = () => {
     rgbRegex.test(secondColor) ||
     rgbaRegex.test(secondColor) ||
     hslRegex.test(secondColor) ||
-    hslaRegex.test(secondColor)
+    hslaRegex.test(secondColor) ||
+    hexRegex3Digit.test(secondColor)
   ) {
     backgroundSwatch.style.backgroundColor = secondColor;
   }
@@ -173,6 +178,13 @@ const displayResult = () => {
     }
   } else if (firstColor.length < 7 || secondColor.length < 7) {
     ratioResult.innerHTML = "";
+  }
+  if(hexRegex3Digit.test(firstColor) && hexRegex3Digit.test(secondColor)) {
+    ratioResult.innerHTML = colorFormatRatio(
+      shortToFullHex(firstColor),
+      shortToFullHex(secondColor),
+      hexToRGB
+    );
   }
   // CASE two RGBAs
   //changed else if to if for two rgba
