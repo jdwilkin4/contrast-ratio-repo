@@ -4,6 +4,7 @@ const foregroundSwatch = document.getElementById("swatch-one");
 const backgroundSwatch = document.getElementById("swatch-two");
 const ratioResult = document.getElementById("contrast-ratio-result");
 const warningBox = document.getElementById("warning-box");
+const infoBox = document.getElementById("info-box");
 
 const hexRegex = /^#([A-Fa-f0-9]{6})$/;
 const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
@@ -103,12 +104,20 @@ const isValidRGB = (color) => {
   } else return false;
 };
 
-const showErrorMessage = () => {
+const showWarningMessage = () => {
   warningBox.classList.remove("hidden");
 };
 
-const hideErrorMessage = () => {
+const hideWarningMessage = () => {
   warningBox.classList.add("hidden");
+};
+
+const showWInfoMessage = () => {
+  infoBox.classList.remove("hidden");
+};
+
+const hideInfoMessage = () => {
+  infoBox.classList.add("hidden");
 };
 
 const isNotEmpty = (value) => {
@@ -172,7 +181,9 @@ const updateSwatchColor = (swatch, color) => {
 };
 
 const displayColor = () => {
-  hideErrorMessage();
+  hideWarningMessage();
+  hideInfoMessage();
+  ratioResult.innerHTML = "";
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
   updateSwatchColor(foregroundSwatch, firstColor);
@@ -180,8 +191,6 @@ const displayColor = () => {
 };
 
 const displayResult = () => {
-  hideErrorMessage();
-
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
 
@@ -198,7 +207,7 @@ const displayResult = () => {
     }
     if (firstColor.length >= 7 && secondColor.length >= 7) {
       if (!hexRegex.test(firstColor) || !hexRegex.test(secondColor)) {
-        showErrorMessage();
+        showWarningMessage();
       }
     } else if (firstColor.length < 7 || secondColor.length < 7) {
       ratioResult.innerHTML = "";
@@ -232,9 +241,10 @@ const displayResult = () => {
         rgbInputToRGBNumbers
       );
     } else {
-      ratioResult.innerHTML = "";
-      showErrorMessage();
+      showWarningMessage();
     }
+  } else {
+    showWInfoMessage();
   }
 
   //CASE two HSLAs

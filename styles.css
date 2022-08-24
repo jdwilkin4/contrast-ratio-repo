@@ -106,35 +106,43 @@ footer p {
   margin: 4rem 0 1rem 0;
 }
 
-#warning-box {
+.error-box {
   margin: 10px auto;
   padding: 10px;
   border-radius: 3px 3px 3px 3px;
-  color: #9f6000;
-  background-color: #feefb3;
   width: 80%;
 }
 
-.warning-text {
+#warning-box {
+  color: #9f6000;
+  background-color: #feefb3;
+}
+
+.error-text {
   font-size: 1rem;
-  margin: 5px 10px;
+  margin: 5px 20px;
   line-height: 1.5rem;
 }
 
-.warning-text > i {
+.error-text > i {
   margin-right: 10px;
 }
 
-.warning-text > a {
+.error-text > a {
   color: #c77b09;
 }
 
-.warning-text > a:hover {
+.error-text > a:hover {
   color: #eb9617;
 }
 
 .hidden {
   display: none;
+}
+
+#info-box {
+  color: #059;
+  background-color: #bef;
 }
 
 .result-row {
@@ -273,7 +281,7 @@ small {
     gap: 1rem;
   }
 
-  #warning-box {
+  .error-box {
     width: 70%;
   }
 }
