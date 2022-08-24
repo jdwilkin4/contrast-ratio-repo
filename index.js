@@ -84,6 +84,13 @@ const hslaToCloseRGB = (hslaColor) => {
   return rgbaToCloseRGB(hslaToRGBA);
 };
 
+const isValidRGB = (color) => {
+  const rgbRegex = /^rgb\(\s?\d{1,3},\s?\d{1,3},\s?\d{1,3}\)$/i;
+  if (rgbRegex.test(color)) {
+    return rgbInputToRGBNumbers(color).every((v) => 0 <= v && v <= 255);
+  } else return false;
+};
+
 const getLuminance = (RGBarray) => {
   //convert 8bit colors to
   //RsRGB, GsRGB BsRGB
@@ -127,8 +134,8 @@ const colorFormatRatio = (color1, color2, convertRatio) => {
   return calculateRatio(RGBColor1, RGBColor2);
 };
 const shortToFullHex = (hexColor) => {
-  return [...hexColor].map((x, index) => (index != 0) ? x + x: x).join("");
-}
+  return [...hexColor].map((x, index) => (index != 0 ? x + x : x)).join("");
+};
 const displayResult = () => {
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
@@ -179,7 +186,7 @@ const displayResult = () => {
   } else if (firstColor.length < 7 || secondColor.length < 7) {
     ratioResult.innerHTML = "";
   }
-  if(hexRegex3Digit.test(firstColor) && hexRegex3Digit.test(secondColor)) {
+  if (hexRegex3Digit.test(firstColor) && hexRegex3Digit.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(
       shortToFullHex(firstColor),
       shortToFullHex(secondColor),
