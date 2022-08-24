@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800;900");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css");
 
 *,
 *::before,
@@ -103,6 +104,29 @@ footer p {
   justify-content: center;
   gap: 1rem;
   margin: 4rem 0 1rem 0;
+}
+
+#warning-box {
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+  color: #9f6000;
+  background-color: #feefb3;
+  width: 80%;
+}
+
+#warning-text {
+  font-size: 1rem;
+  margin: 5px 10px;
+  line-height: 1.5rem;
+}
+
+#warning-text > i {
+  margin-right: 10px;
+}
+
+.hidden {
+  display: none;
 }
 
 .result-row {
@@ -239,6 +263,10 @@ small {
     flex-direction: row;
     align-items: flex-start;
     gap: 1rem;
+  }
+
+  #warning-box {
+    width: 70%;
   }
 }
 
