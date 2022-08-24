@@ -5,6 +5,16 @@ const backgroundSwatch = document.getElementById("swatch-two");
 const ratioResult = document.getElementById("contrast-ratio-result");
 const warningBox = document.getElementById("warning-box");
 
+const hexRegex = /^#([A-Fa-f0-9]{6})$/;
+const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
+const rgbaRegex = /^rgba.*/i;
+const hslRegex = /^hsl.*/i;
+const hslaRegex = /^hsla.*/i;
+
+const shortToFullHex = (hexColor) => {
+  return [...hexColor].map((x, index) => (index != 0 ? x + x : x)).join("");
+};
+
 const hexToRGB = (hexColor) => {
   const R = parseInt(hexColor.slice(1, 3), 16);
   const G = parseInt(hexColor.slice(3, 5), 16);
@@ -101,6 +111,10 @@ const hideErrorMessage = () => {
   warningBox.classList.add("hidden");
 };
 
+const isNotEmpty = (value) => {
+  return value !== null && value !== "";
+};
+
 const getLuminance = (RGBarray) => {
   //convert 8bit colors to
   //RsRGB, GsRGB BsRGB
@@ -143,78 +157,74 @@ const colorFormatRatio = (color1, color2, convertRatio) => {
   const RGBColor2 = convertRatio(color2);
   return calculateRatio(RGBColor1, RGBColor2);
 };
-const shortToFullHex = (hexColor) => {
-  return [...hexColor].map((x, index) => (index != 0 ? x + x : x)).join("");
+
+const updateSwatchColor = (swatch, color) => {
+  if (
+    hexRegex.test(color) ||
+    isValidRGB(color) ||
+    rgbaRegex.test(color) ||
+    hslRegex.test(color) ||
+    hslaRegex.test(color) ||
+    hexRegex3Digit.test(color)
+  ) {
+    swatch.style.backgroundColor = color;
+  }
 };
-const displayResult = () => {
+
+const displayColor = () => {
   hideErrorMessage();
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
-  const rgbRegex = /^rgb.*/i;
-  const rgbaRegex = /^rgba.*/i;
-  const hexRegex = /^#([A-Fa-f0-9]{6})$/;
-  const hslRegex = /^hsl.*/i;
-  const hslaRegex = /^hsla.*/i;
-  const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
-  if (
-    firstColor.length === 7 ||
-    isValidRGB(firstColor) ||
-    rgbaRegex.test(firstColor) ||
-    hslRegex.test(firstColor) ||
-    hslaRegex.test(firstColor) ||
-    hexRegex3Digit.test(firstColor)
-  ) {
-    foregroundSwatch.style.backgroundColor = firstColor;
-  }
-  if (
-    secondColor.length === 7 ||
-    isValidRGB(secondColor) ||
-    rgbaRegex.test(secondColor) ||
-    hslRegex.test(secondColor) ||
-    hslaRegex.test(secondColor) ||
+  updateSwatchColor(foregroundSwatch, firstColor);
+  updateSwatchColor(backgroundSwatch, secondColor);
+};
+
+const displayResult = () => {
+  hideErrorMessage();
+
+  let firstColor = foregroundColor.value;
+  let secondColor = backgroundColor.value;
+
+  // CASE two Hexes
+  if (/^#.*/.test(firstColor) && /^#.*/.test(secondColor)) {
+    if (firstColor.length === 7 && secondColor.length === 7) {
+      if (hexRegex.test(firstColor) && hexRegex.test(secondColor)) {
+        ratioResult.innerHTML = colorFormatRatio(
+          firstColor,
+          secondColor,
+          hexToRGB
+        );
+      }
+    }
+    if (firstColor.length >= 7 && secondColor.length >= 7) {
+      if (!hexRegex.test(firstColor) || !hexRegex.test(secondColor)) {
+        showErrorMessage();
+      }
+    } else if (firstColor.length < 7 || secondColor.length < 7) {
+      ratioResult.innerHTML = "";
+    }
+  } else if (
+    hexRegex3Digit.test(firstColor) &&
     hexRegex3Digit.test(secondColor)
   ) {
-    backgroundSwatch.style.backgroundColor = secondColor;
-  }
-  // CASE two Hexes
-  if (firstColor.length === 7 && secondColor.length === 7) {
-    if (hexRegex.test(firstColor) && hexRegex.test(secondColor)) {
-      ratioResult.innerHTML = colorFormatRatio(
-        firstColor,
-        secondColor,
-        hexToRGB
-      );
-    }
-  }
-  if (firstColor.length >= 7 && secondColor.length >= 7) {
-    if (!hexRegex.test(firstColor) || !hexRegex.test(secondColor)) {
-      ratioResult.innerHTML = `
-        <div class = "error-message">
-          <h3>Invalid Input</h3>
-          <p>The following format is supported. Hexadecimal (e.g #000000, #f1f1f1)</p>
-        </div>`;
-    }
-  } else if (firstColor.length < 7 || secondColor.length < 7) {
-    ratioResult.innerHTML = "";
-  }
-  if (hexRegex3Digit.test(firstColor) && hexRegex3Digit.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(
       shortToFullHex(firstColor),
       shortToFullHex(secondColor),
       hexToRGB
     );
   }
+
   // CASE two RGBAs
-  //changed else if to if for two rgba
-  if (rgbaRegex.test(firstColor) && rgbaRegex.test(secondColor)) {
+  else if (rgbaRegex.test(firstColor) && rgbaRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(
       firstColor,
       secondColor,
       rgbaToCloseRGB
     );
   }
+
   // CASE two RGBs
-  else if (rgbRegex.test(firstColor) && rgbRegex.test(secondColor)) {
+  else if (isNotEmpty(firstColor) && isNotEmpty(secondColor)) {
     if (isValidRGB(firstColor) && isValidRGB(secondColor)) {
       ratioResult.innerHTML = colorFormatRatio(
         firstColor,
@@ -226,8 +236,9 @@ const displayResult = () => {
       showErrorMessage();
     }
   }
+
   //CASE two HSLAs
-  else if (hslaRegex.test(firstColor) && hslaRegex.test(secondColor)) {
+  if (hslaRegex.test(firstColor) && hslaRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(
       firstColor,
       secondColor,
@@ -240,7 +251,9 @@ const displayResult = () => {
   }
 };
 
-foregroundColor.oninput = displayResult;
-backgroundColor.oninput = displayResult;
+foregroundColor.oninput = displayColor;
+backgroundColor.oninput = displayColor;
+foregroundColor.onblur = displayResult;
+backgroundColor.onblur = displayResult;
 
 document.querySelector("#copyright").innerText = new Date().getFullYear();
