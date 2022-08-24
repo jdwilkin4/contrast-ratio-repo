@@ -23,6 +23,39 @@ const hexToRGB = (hexColor) => {
   return [R, G, B];
 };
 
+const rgbInputToRGBNumbers = (rgbColor) => {
+  [R, G, B] = rgbColor
+    .replace(/[^\d,]/g, "")
+    .split(",")
+    .map((RGBValue) => parseInt(RGBValue));
+  return [R, G, B];
+};
+
+const isValidRGB = (color) => {
+  const rgbRegex = /^rgb\(\s?\d{1,3},\s?\d{1,3},\s?\d{1,3}\)$/i;
+  if (rgbRegex.test(color)) {
+    return rgbInputToRGBNumbers(color).every((v) => 0 <= v && v <= 255);
+  } else return false;
+};
+
+// Determine the equivalent opaque RGB color
+// for a given partially transparent RGB color against a white background
+const rgbaToCloseRGB = (rgbaColor) => {
+  const bg = [255, 255, 255];
+  [R, G, B, o] = rgbaColor
+    .replace(/[^\d,.]/g, "")
+    .split(",")
+    .map((el) => parseFloat(el));
+  // Y = p * T + (1 - p) * B , where:
+  // p is the opacity of the top layer
+  // T is the rgb number of the top layer color
+  // B is the rgb number of the fully opaque bottom layer
+  // Y is the rgb number of the equivalent fully opaque color
+  return [R, G, B].map((colFg, idx) =>
+    Math.ceil(o * colFg + (1 - o) * bg[idx])
+  );
+};
+
 const hslToRGB = (hslColor) => {
   const dataForCalculation = hslColor
     .replace(/[\(\)\sA-Za-z%]/g, "")
@@ -63,65 +96,12 @@ const hslToRGB = (hslColor) => {
   );
 };
 
-const rgbInputToRGBNumbers = (rgbColor) => {
-  [R, G, B] = rgbColor
-    .replace(/[^\d,]/g, "")
-    .split(",")
-    .map((RGBValue) => parseInt(RGBValue));
-  return [R, G, B];
-};
-
-// Determine the equivalent opaque RGB color
-// for a given partially transparent RGB color against a white background
-const rgbaToCloseRGB = (rgbaColor) => {
-  const bg = [255, 255, 255];
-  [R, G, B, o] = rgbaColor
-    .replace(/[^\d,.]/g, "")
-    .split(",")
-    .map((el) => parseFloat(el));
-  // Y = p * T + (1 - p) * B , where:
-  // p is the opacity of the top layer
-  // T is the rgb number of the top layer color
-  // B is the rgb number of the fully opaque bottom layer
-  // Y is the rgb number of the equivalent fully opaque color
-  return [R, G, B].map((colFg, idx) =>
-    Math.ceil(o * colFg + (1 - o) * bg[idx])
-  );
-};
-
 const hslaToCloseRGB = (hslaColor) => {
   const formattedHSLA = hslaColor.replace(/[\(\)\sA-Za-z%]/g, "").split(",");
   const opacity = formattedHSLA.pop();
   const hslaToRGBA =
     hslToRGB(formattedHSLA.join(",")).join(",") + `,${opacity}`;
   return rgbaToCloseRGB(hslaToRGBA);
-};
-
-const isValidRGB = (color) => {
-  const rgbRegex = /^rgb\(\s?\d{1,3},\s?\d{1,3},\s?\d{1,3}\)$/i;
-  if (rgbRegex.test(color)) {
-    return rgbInputToRGBNumbers(color).every((v) => 0 <= v && v <= 255);
-  } else return false;
-};
-
-const showWarningMessage = () => {
-  warningBox.classList.remove("hidden");
-};
-
-const hideWarningMessage = () => {
-  warningBox.classList.add("hidden");
-};
-
-const showWInfoMessage = () => {
-  infoBox.classList.remove("hidden");
-};
-
-const hideInfoMessage = () => {
-  infoBox.classList.add("hidden");
-};
-
-const isNotEmpty = (value) => {
-  return value !== null && value !== "";
 };
 
 const getLuminance = (RGBarray) => {
@@ -167,6 +147,32 @@ const colorFormatRatio = (color1, color2, convertRatio) => {
   return calculateRatio(RGBColor1, RGBColor2);
 };
 
+const isNotEmpty = (value) => {
+  return value !== null && value !== "";
+};
+
+const showWarningMessage = () => {
+  warningBox.classList.remove("hidden");
+};
+
+const hideWarningMessage = () => {
+  warningBox.classList.add("hidden");
+};
+
+const showWInfoMessage = () => {
+  infoBox.classList.remove("hidden");
+};
+
+const hideInfoMessage = () => {
+  infoBox.classList.add("hidden");
+};
+
+const clearErrors = () => {
+  hideWarningMessage();
+  hideInfoMessage();
+  ratioResult.innerHTML = "";
+};
+
 const updateSwatchColor = (swatch, color) => {
   if (
     hexRegex.test(color) ||
@@ -181,13 +187,15 @@ const updateSwatchColor = (swatch, color) => {
 };
 
 const displayColor = () => {
-  hideWarningMessage();
-  hideInfoMessage();
-  ratioResult.innerHTML = "";
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
   updateSwatchColor(foregroundSwatch, firstColor);
   updateSwatchColor(backgroundSwatch, secondColor);
+};
+
+const handleChange = () => {
+  clearErrors();
+  displayColor();
 };
 
 const displayResult = () => {
@@ -248,6 +256,7 @@ const displayResult = () => {
   }
 
   //CASE two HSLAs
+  // Changed else if to if
   if (hslaRegex.test(firstColor) && hslaRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(
       firstColor,
@@ -261,8 +270,8 @@ const displayResult = () => {
   }
 };
 
-foregroundColor.oninput = displayColor;
-backgroundColor.oninput = displayColor;
+foregroundColor.oninput = handleChange;
+backgroundColor.oninput = handleChange;
 foregroundColor.onblur = displayResult;
 backgroundColor.onblur = displayResult;
 
