@@ -115,14 +115,22 @@ footer p {
   width: 80%;
 }
 
-#warning-text {
+.warning-text {
   font-size: 1rem;
   margin: 5px 10px;
   line-height: 1.5rem;
 }
 
-#warning-text > i {
+.warning-text > i {
   margin-right: 10px;
+}
+
+.warning-text > a {
+  color: #c77b09;
+}
+
+.warning-text > a:hover {
+  color: #eb9617;
 }
 
 .hidden {

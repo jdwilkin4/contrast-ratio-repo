@@ -3,7 +3,6 @@ const backgroundColor = document.getElementById("background-color");
 const foregroundSwatch = document.getElementById("swatch-one");
 const backgroundSwatch = document.getElementById("swatch-two");
 const ratioResult = document.getElementById("contrast-ratio-result");
-const warningMessage = document.getElementById("warning-text");
 const warningBox = document.getElementById("warning-box");
 
 const hexToRGB = (hexColor) => {
@@ -94,6 +93,14 @@ const isValidRGB = (color) => {
   } else return false;
 };
 
+const showErrorMessage = () => {
+  warningBox.classList.remove("hidden");
+};
+
+const hideErrorMessage = () => {
+  warningBox.classList.add("hidden");
+};
+
 const getLuminance = (RGBarray) => {
   //convert 8bit colors to
   //RsRGB, GsRGB BsRGB
@@ -140,6 +147,7 @@ const shortToFullHex = (hexColor) => {
   return [...hexColor].map((x, index) => (index != 0 ? x + x : x)).join("");
 };
 const displayResult = () => {
+  hideErrorMessage();
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
   const rgbRegex = /^rgb.*/i;
@@ -150,7 +158,7 @@ const displayResult = () => {
   const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
   if (
     firstColor.length === 7 ||
-    rgbRegex.test(firstColor) ||
+    isValidRGB(firstColor) ||
     rgbaRegex.test(firstColor) ||
     hslRegex.test(firstColor) ||
     hslaRegex.test(firstColor) ||
@@ -160,7 +168,7 @@ const displayResult = () => {
   }
   if (
     secondColor.length === 7 ||
-    rgbRegex.test(secondColor) ||
+    isValidRGB(secondColor) ||
     rgbaRegex.test(secondColor) ||
     hslRegex.test(secondColor) ||
     hslaRegex.test(secondColor) ||
@@ -207,11 +215,16 @@ const displayResult = () => {
   }
   // CASE two RGBs
   else if (rgbRegex.test(firstColor) && rgbRegex.test(secondColor)) {
-    ratioResult.innerHTML = colorFormatRatio(
-      firstColor,
-      secondColor,
-      rgbInputToRGBNumbers
-    );
+    if (isValidRGB(firstColor) && isValidRGB(secondColor)) {
+      ratioResult.innerHTML = colorFormatRatio(
+        firstColor,
+        secondColor,
+        rgbInputToRGBNumbers
+      );
+    } else {
+      ratioResult.innerHTML = "";
+      showErrorMessage();
+    }
   }
   //CASE two HSLAs
   else if (hslaRegex.test(firstColor) && hslaRegex.test(secondColor)) {
