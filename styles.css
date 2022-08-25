@@ -109,7 +109,7 @@ footer p {
 .error-box {
   margin: 10px auto;
   padding: 10px;
-  border-radius: 3px 3px 3px 3px;
+  border-radius: 3px;
   width: 80%;
 }
 

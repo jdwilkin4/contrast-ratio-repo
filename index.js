@@ -151,25 +151,17 @@ const isNotEmpty = (value) => {
   return value !== null && value !== "";
 };
 
-const showWarningMessage = () => {
-  warningBox.classList.remove("hidden");
+const showWarningMessage = (div) => {
+  div.classList.remove(`hidden`);
 };
 
-const hideWarningMessage = () => {
-  warningBox.classList.add("hidden");
-};
-
-const showWInfoMessage = () => {
-  infoBox.classList.remove("hidden");
-};
-
-const hideInfoMessage = () => {
-  infoBox.classList.add("hidden");
+const hideWarningMessage = (div) => {
+  div.classList.add(`hidden`);
 };
 
 const clearErrors = () => {
-  hideWarningMessage();
-  hideInfoMessage();
+  hideWarningMessage(warningBox);
+  hideWarningMessage(infoBox);
   ratioResult.innerHTML = "";
 };
 
@@ -215,7 +207,7 @@ const displayResult = () => {
     }
     if (firstColor.length >= 7 && secondColor.length >= 7) {
       if (!hexRegex.test(firstColor) || !hexRegex.test(secondColor)) {
-        showWarningMessage();
+        showWarningMessage(warningBox);
       }
     } else if (firstColor.length < 7 || secondColor.length < 7) {
       ratioResult.innerHTML = "";
@@ -249,10 +241,10 @@ const displayResult = () => {
         rgbInputToRGBNumbers
       );
     } else {
-      showWarningMessage();
+      showWarningMessage(warningBox);
     }
   } else {
-    showWInfoMessage();
+    showWarningMessage(infoBox);
   }
 
   //CASE two HSLAs
