@@ -17,16 +17,12 @@ const hslToRGB = (hslColor) => {
     .map((hslValue, index) => {
       return index === 0 ? Number(hslValue) : Number(hslValue) / 100;
     });
-  //console.log(dataForCalculation);
   //C = (1 - |2L - 1|) * S
   const Chroma =
     (1 - Math.abs(2 * dataForCalculation[2] - 1)) * dataForCalculation[1];
   const HuePrime = dataForCalculation[0] / 60;
   //X = C * (1 |H' mod 2 - 1|)
   const X = Chroma * (1 - Math.abs((HuePrime % 2) - 1));
-  //console.log(Chroma);
-  //console.log(HuePrime);
-  //console.log(X);
   let RGBresult = [];
   if (HuePrime <= 1) {
     RGBresult = [Chroma, X, 0];
@@ -40,16 +36,13 @@ const hslToRGB = (hslColor) => {
     RGBresult = [X, 0, Chroma];
   } else {
     RGBresult = [Chroma, 0, X];
-  }
-  //console.log(RGBresult)
+  };
   //m = L - (C / 2)
   const adjustLightness = dataForCalculation[2] - Chroma / 2;
-  //console.log(adjustLightness);
   return RGBresult.map((RGBvalue) =>
     Math.round((RGBvalue + adjustLightness) * 255)
   );
 };
-
 const rgbInputToRGBNumbers = (rgbColor) => {
   [R, G, B] = rgbColor
     .replace(/[^\d,]/g, "")
