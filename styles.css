@@ -17,6 +17,12 @@
   --fail-border: #ff0000;
   --footer-bg: #555;
   --swatch-border: #000;
+  --warning-text: #9f6000;
+  --warning-bg: #feefb3;
+  --warning-link: #c77b09;
+  --warning-link-hover: #eb9617;
+  --info-text: #059;
+  --info-bg: #bef;
 }
 
 body {
@@ -86,10 +92,6 @@ footer p {
   text-align: center;
 }
 
-.error-message :first-child {
-  margin-bottom: -10px;
-  margin-top: -10px;
-}
 .large {
   font-weight: bold;
   font-size: 2rem;
@@ -114,8 +116,8 @@ footer p {
 }
 
 #warning-box {
-  color: #9f6000;
-  background-color: #feefb3;
+  color: var(--warning-text);
+  background-color: var(--warning-bg);
 }
 
 .error-text {
@@ -129,11 +131,11 @@ footer p {
 }
 
 .error-text > a {
-  color: #c77b09;
+  color: var(--warning-link);
 }
 
 .error-text > a:hover {
-  color: #eb9617;
+  color: var(--warning-link-hover);
 }
 
 .hidden {
@@ -141,8 +143,8 @@ footer p {
 }
 
 #info-box {
-  color: #059;
-  background-color: #bef;
+  color: var(--info-text);
+  background-color: var(--info-bg);
 }
 
 .result-row {
