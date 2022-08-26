@@ -16,6 +16,7 @@
     <main>
       <section class="primary">
         <div class="container">
+
           <h1 class="page-title letter-spacing">Contrast Ratio Calculator</h1>
           <p class="description">
             Calculate the contrast ratio between two colors.
@@ -68,6 +69,83 @@
                       height=""
                       viewBox="0 -4 30 30"
                       version="1.1"
+
+          <div class="heading">
+            <h1 class="page-title letter-spacing">
+              Contrast &nbsp;&nbsp;Ratio&nbsp;&nbsp; Calculator
+            </h1>
+            <p class="description">
+              Calculate the contrast ratio between two colors.
+            </p>
+          </div>
+          <div class="inputs-row">
+            <div class="input-fields">
+              <div>
+                <label for="foreground-color">Foreground color</label>
+              </div>
+              <div class="input-items">
+                <div id="swatch-one" class="swatch-one"></div>
+                <input
+                  id="foreground-color"
+                  name="foreground-color"
+                  type="text"
+                  placeholder="rgb(255, 255, 255)"
+                />
+              </div>
+            </div>
+            <div class="input-fields">
+              <div>
+                <label for="background-color">Background color</label>
+              </div>
+              <div class="input-items">
+                <div id="swatch-two" class="swatch-two"></div>
+                <input
+                  id="background-color"
+                  name="background-color"
+                  type="text"
+                  placeholder="#000000"
+                />
+              </div>
+            </div>
+          </div>
+          <h2 class="sr-only">Results</h2>
+          <div class="result-row">
+            <div class="ratio-result">
+              <div>
+                <h3 class="text-small">Contrast Ratio</h3>
+                <p id="contrast-ratio-result" class="large"></p>
+              </div>
+            </div>
+            <div class="check-result">
+              <div>
+                <h3 class="text-small">Small Text</h3>
+                <div class="pass">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="30px"
+                    height="100%"
+                    viewBox="0 -4 30 30"
+                    version="1.1"
+                  >
+                    <defs>
+                      <linearGradient
+                        x1="50%"
+                        y1="0%"
+                        x2="50%"
+                        y2="100%"
+                        id="linearGradient-1"
+                      >
+                        <stop stop-color="#1DD47F" offset="0%" />
+                        <stop stop-color="#0DA949" offset="100%" />
+                      </linearGradient>
+                    </defs>
+                    <g
+                      stroke="none"
+                      stroke-width="1"
+                      fill="none"
+                      fill-rule="evenodd"
+
                     >
                       <defs>
                         <linearGradient
@@ -100,6 +178,7 @@
                           </g>
                         </g>
                       </g>
+
                     </svg>
                   </div>
                   <div class="pass">
@@ -109,6 +188,30 @@
                       width="30px"
                       height=""
                       viewBox="0 -4 30 30"
+
+                    </g>
+                  </svg>
+                </div>
+                <div class="pass">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="30px"
+                    height="100%"
+                    viewBox="0 -4 30 30"
+                  >
+                    <defs>
+                      <linearGradient x1="50%" y1="0%" x2="50%" y2="100%">
+                        <stop stop-color="#1DD47F" offset="0%" />
+                        <stop stop-color="#0DA949" offset="100%" />
+                      </linearGradient>
+                    </defs>
+                    <g
+                      stroke="none"
+                      stroke-width="1"
+                      fill="none"
+                      fill-rule="evenodd"
+
                     >
                       <defs>
                         <linearGradient x1="50%" y1="0%" x2="50%" y2="100%">
@@ -138,6 +241,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="check-result">
                 <div>
                   <h3 class="text-small">Large Text</h3>
@@ -174,6 +278,44 @@
                       />
                     </svg>
                   </div>
+
+            </div>
+            <div class="check-result">
+              <div>
+                <h3 class="text-small">Large Text</h3>
+                <div class="fail">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    version="1.1"
+                    width="30px"
+                    height="100%"
+                    viewBox="0 0 511.999 511.999"
+                    style="enable-background: new 0 0 511.999 511.999"
+                    xml:space="preserve"
+                  >
+                    <path
+                      style="fill: #ff6465"
+                      d="M384.955,256l120.28-120.28c9.019-9.019,9.019-23.642,0-32.66L408.94,6.765  c-9.019-9.019-23.642-9.019-32.66,0l-120.28,120.28L135.718,6.765c-9.019-9.019-23.642-9.019-32.66,0L6.764,103.058  c-9.019,9.019-9.019,23.642,0,32.66l120.28,120.28L6.764,376.28c-9.019,9.019-9.019,23.642,0,32.66l96.295,96.294  c9.019,9.019,23.642,9.019,32.66,0l120.28-120.28l120.28,120.28c9.019,9.019,23.642,9.019,32.66,0l96.295-96.294  c9.019-9.019,9.019-23.642,0-32.66L384.955,256z"
+                    />
+                  </svg>
+                </div>
+                <div class="fail">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="30px"
+                    height="100%"
+                    viewBox="0 0 511.999 511.999"
+                    style="enable-background: new 0 0 511.999 511.999"
+                    xml:space="preserve"
+                  >
+                    <path
+                      style="fill: #ff6465"
+                      d="M384.955,256l120.28-120.28c9.019-9.019,9.019-23.642,0-32.66L408.94,6.765  c-9.019-9.019-23.642-9.019-32.66,0l-120.28,120.28L135.718,6.765c-9.019-9.019-23.642-9.019-32.66,0L6.764,103.058  c-9.019,9.019-9.019,23.642,0,32.66l120.28,120.28L6.764,376.28c-9.019,9.019-9.019,23.642,0,32.66l96.295,96.294  c9.019,9.019,23.642,9.019,32.66,0l120.28-120.28l120.28,120.28c9.019,9.019,23.642,9.019,32.66,0l96.295-96.294  c9.019-9.019,9.019-23.642,0-32.66L384.955,256z"
+                    />
+                  </svg>
+
                 </div>
               </div>
               <div class="check-result">
