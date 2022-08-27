@@ -3,8 +3,8 @@ const backgroundColor = document.getElementById("background-color");
 const foregroundSwatch = document.getElementById("swatch-one");
 const backgroundSwatch = document.getElementById("swatch-two");
 const ratioResult = document.getElementById("contrast-ratio-result");
-const warningBox = document.getElementById("warning-box");
-const infoBox = document.getElementById("info-box");
+const warning = document.getElementById("warning-box");
+const info = document.getElementById("info-box");
 
 const hexRegex = /^#([A-Fa-f0-9]{6})$/;
 const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
@@ -151,17 +151,17 @@ const isNotEmpty = (value) => {
   return value !== null && value !== "";
 };
 
-const showWarningMessage = (div) => {
+const showErrorMessage = (div) => {
   div.classList.remove(`hidden`);
 };
 
-const hideWarningMessage = (div) => {
+const hideErrorMessage = (div) => {
   div.classList.add(`hidden`);
 };
 
 const clearErrors = () => {
-  hideWarningMessage(warningBox);
-  hideWarningMessage(infoBox);
+  hideErrorMessage(warning);
+  hideErrorMessage(info);
   ratioResult.innerHTML = "";
 };
 
@@ -207,7 +207,7 @@ const displayResult = () => {
     }
     if (firstColor.length >= 7 && secondColor.length >= 7) {
       if (!hexRegex.test(firstColor) || !hexRegex.test(secondColor)) {
-        showWarningMessage(warningBox);
+        showErrorMessage(warning);
       }
     } else if (firstColor.length < 7 || secondColor.length < 7) {
       ratioResult.innerHTML = "";
@@ -241,10 +241,10 @@ const displayResult = () => {
         rgbInputToRGBNumbers
       );
     } else {
-      showWarningMessage(warningBox);
+      showErrorMessage(warning);
     }
   } else {
-    showWarningMessage(infoBox);
+    showErrorMessage(info);
   }
 
   //CASE two HSLAs
