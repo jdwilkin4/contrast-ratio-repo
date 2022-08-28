@@ -90,6 +90,7 @@ footer p {
   margin-top: -10px;
 }
 .large {
+  margin: 0px;
   font-size: 2.5rem;
   font-variation-settings: "wght" 650;
 }
