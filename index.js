@@ -27,7 +27,7 @@ const hexToRGB = (hexColor) => {
 };
 
 const rgbInputToRGBNumbers = (rgbColor) => {
-  [R, G, B] = rgbColor
+  const [R, G, B] = rgbColor
     .replace(/[^\d,]/g, "")
     .split(",")
     .map((RGBValue) => parseInt(RGBValue));
@@ -45,7 +45,7 @@ const isValidRGB = (color) => {
 // for a given partially transparent RGB color against a white background
 const rgbaToCloseRGB = (rgbaColor) => {
   const bg = [255, 255, 255];
-  [R, G, B, o] = rgbaColor
+  const [R, G, B, o] = rgbaColor
     .replace(/[^\d,.]/g, "")
     .split(",")
     .map((el) => parseFloat(el));
