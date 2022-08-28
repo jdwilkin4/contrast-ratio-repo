@@ -1,8 +1,11 @@
+import { namesAndRGBValues } from "./helpers.js";
+
 const foregroundColor = document.getElementById("foreground-color");
 const backgroundColor = document.getElementById("background-color");
 const foregroundSwatch = document.getElementById("swatch-one");
 const backgroundSwatch = document.getElementById("swatch-two");
 const ratioResult = document.getElementById("contrast-ratio-result");
+
 const hexToRGB = (hexColor) => {
   const R = parseInt(hexColor.slice(1, 3), 16);
   const G = parseInt(hexColor.slice(3, 5), 16);
@@ -126,25 +129,31 @@ const colorFormatRatio = (color1, color2, convertRatio) => {
   const RGBColor2 = convertRatio(color2);
   return calculateRatio(RGBColor1, RGBColor2);
 };
+
 const shortToFullHex = (hexColor) => {
-  return [...hexColor].map((x, index) => (index != 0) ? x + x: x).join("");
-}
+  return [...hexColor].map((x, index) => (index != 0 ? x + x : x)).join("");
+};
+
 const displayResult = () => {
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
+
   const rgbRegex = /^rgb.*/i;
   const rgbaRegex = /^rgba.*/i;
   const hexRegex = /^#([A-Fa-f0-9]{6})$/;
   const hslRegex = /^hsl.*/i;
   const hslaRegex = /^hsla.*/i;
   const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
+  const isItNamedColor = (color) => namesAndRGBValues.hasOwnProperty(color);
+
   if (
     firstColor.length === 7 ||
     rgbRegex.test(firstColor) ||
     rgbaRegex.test(firstColor) ||
     hslRegex.test(firstColor) ||
     hslaRegex.test(firstColor) ||
-    hexRegex3Digit.test(firstColor)
+    hexRegex3Digit.test(firstColor) ||
+    isItNamedColor(firstColor)
   ) {
     foregroundSwatch.style.backgroundColor = firstColor;
   }
@@ -154,7 +163,8 @@ const displayResult = () => {
     rgbaRegex.test(secondColor) ||
     hslRegex.test(secondColor) ||
     hslaRegex.test(secondColor) ||
-    hexRegex3Digit.test(secondColor)
+    hexRegex3Digit.test(secondColor) ||
+    isItNamedColor(secondColor)
   ) {
     backgroundSwatch.style.backgroundColor = secondColor;
   }
@@ -179,7 +189,7 @@ const displayResult = () => {
   } else if (firstColor.length < 7 || secondColor.length < 7) {
     ratioResult.innerHTML = "";
   }
-  if(hexRegex3Digit.test(firstColor) && hexRegex3Digit.test(secondColor)) {
+  if (hexRegex3Digit.test(firstColor) && hexRegex3Digit.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(
       shortToFullHex(firstColor),
       shortToFullHex(secondColor),
@@ -214,6 +224,13 @@ const displayResult = () => {
   //CASE two HSLs
   else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
+  }
+  //CASE two named colors
+  else if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
+    ratioResult.innerHTML = calculateRatio(
+      namesAndRGBValues[firstColor],
+      namesAndRGBValues[secondColor]
+    );
   }
 };
 
