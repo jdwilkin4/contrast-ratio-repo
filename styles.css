@@ -98,10 +98,9 @@ footer p {
 }
 
 .large {
-  font-weight: bold;
-  font-size: 2rem;
-  padding: 0;
-  margin: 0;
+  margin: 0px;
+  font-size: 2.5rem;
+  font-variation-settings: "wght" 650;
 }
 
 .inputs-row {
@@ -135,9 +134,26 @@ footer p {
 }
 
 .ratio-result {
-  margin-right: 2rem;
+  margin: 0 2rem;
+  padding: 1rem;
 }
 
+.level-labels {
+  margin: 1.5rem 0 1rem 0;
+  display: flex;
+  justify-content: space-around;
+  font-variation-settings: "wght" 600;
+}
+
+.level {
+  width: 3rem;
+}
+
+.icons {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-around;
+}
 .input-items {
   display: flex;
   align-items: center;
