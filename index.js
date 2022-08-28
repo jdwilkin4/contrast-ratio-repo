@@ -216,15 +216,13 @@ const displayResult = () => {
     } else if (firstColor.length < 7 || secondColor.length < 7) {
       ratioResult.innerHTML = "";
     }
-  } else if (
-    hexRegex3Digit.test(firstColor) &&
-    hexRegex3Digit.test(secondColor)
-  ) {
-    ratioResult.innerHTML = colorFormatRatio(
-      shortToFullHex(firstColor),
-      shortToFullHex(secondColor),
-      hexToRGB
-    );
+    if (hexRegex3Digit.test(firstColor) && hexRegex3Digit.test(secondColor)) {
+      ratioResult.innerHTML = colorFormatRatio(
+        shortToFullHex(firstColor),
+        shortToFullHex(secondColor),
+        hexToRGB
+      );
+    }
   }
 
   // CASE two RGBAs
