@@ -34,13 +34,6 @@ const rgbInputToRGBNumbers = (rgbColor) => {
   return [R, G, B];
 };
 
-const isValidRGB = (color) => {
-  const rgbRegex = /^rgb\(\s?\d{1,3},\s?\d{1,3},\s?\d{1,3}\)$/i;
-  if (rgbRegex.test(color)) {
-    return rgbInputToRGBNumbers(color).every((v) => 0 <= v && v <= 255);
-  } else return false;
-};
-
 // Determine the equivalent opaque RGB color
 // for a given partially transparent RGB color against a white background
 const rgbaToCloseRGB = (rgbaColor) => {
@@ -148,6 +141,13 @@ const colorFormatRatio = (color1, color2, convertRatio) => {
   const RGBColor1 = convertRatio(color1);
   const RGBColor2 = convertRatio(color2);
   return calculateRatio(RGBColor1, RGBColor2);
+};
+
+const isValidRGB = (color) => {
+  const rgbRegex = /^rgb\(\s?\d{1,3},\s?\d{1,3},\s?\d{1,3}\)$/i;
+  if (rgbRegex.test(color)) {
+    return rgbInputToRGBNumbers(color).every((v) => 0 <= v && v <= 255);
+  } else return false;
 };
 
 const isNotEmpty = (value) => {
