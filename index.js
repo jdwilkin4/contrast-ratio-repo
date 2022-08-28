@@ -1,3 +1,5 @@
+import { namesAndRGBValues } from "./helpers.js";
+
 const foregroundColor = document.getElementById("foreground-color");
 const backgroundColor = document.getElementById("background-color");
 const foregroundSwatch = document.getElementById("swatch-one");
@@ -11,6 +13,7 @@ const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
 const rgbaRegex = /^rgba.*/i;
 const hslRegex = /^hsl.*/i;
 const hslaRegex = /^hsla.*/i;
+const isItNamedColor = (color) => namesAndRGBValues.hasOwnProperty(color);
 
 const shortToFullHex = (hexColor) => {
   return [...hexColor].map((x, index) => (index != 0 ? x + x : x)).join("");
@@ -172,7 +175,8 @@ const updateSwatchColor = (swatch, color) => {
     rgbaRegex.test(color) ||
     hslRegex.test(color) ||
     hslaRegex.test(color) ||
-    hexRegex3Digit.test(color)
+    hexRegex3Digit.test(color) ||
+    isItNamedColor(color)
   ) {
     swatch.style.backgroundColor = color;
   }
@@ -259,6 +263,13 @@ const displayResult = () => {
   //CASE two HSLs
   else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
+  }
+  //CASE two named colors
+  else if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
+    ratioResult.innerHTML = calculateRatio(
+      namesAndRGBValues[firstColor],
+      namesAndRGBValues[secondColor]
+    );
   }
 };
 
