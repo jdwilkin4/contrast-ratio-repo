@@ -23,197 +23,201 @@
               Calculate the contrast ratio between two colors.
             </p>
           </div>
-          <div class="inputs-row">
-            <div class="input-fields">
-              <div>
-                <label for="foreground-color">Foreground color</label>
-              </div>
-              <div class="input-items">
-                <div id="swatch-one" class="swatch-one"></div>
-                <input
-                  id="foreground-color"
-                  name="foreground-color"
-                  type="text"
-                  placeholder="rgb(255, 255, 255)"
-                />
-              </div>
-            </div>
-            <div class="input-fields">
-              <div>
-                <label for="background-color">Background color</label>
-              </div>
-              <div class="input-items">
-                <div id="swatch-two" class="swatch-two"></div>
-                <input
-                  id="background-color"
-                  name="background-color"
-                  type="text"
-                  placeholder="#000000"
-                />
-              </div>
-            </div>
-          </div>
-          <div id="warning-box" class="error-box hidden">
-            <p class="error-text">
-              <i class="fas fa-exclamation-triangle"></i>
-              Invalid Input. Please check our
-              <a href="#How-does-it-work">How does it work?</a> for valid color
-              formats.
-            </p>
-          </div>
-          <div id="info-box" class="error-box hidden">
-            <p class="error-text">
-              <i class="fa fa-info-circle"></i>
-              Please make sure to fill both inputs with a valid color.
-            </p>
-          </div>
-          <h2 class="sr-only">Results</h2>
-          <div class="result-row">
-            <div class="ratio-result">
-              <div>
-                <h3 class="text-small">Contrast Ratio</h3>
-                <p id="contrast-ratio-result" class="large"></p>
-              </div>
-            </div>
-            <div class="check-result">
-              <div>
-                <h3 class="text-small">Small Text</h3>
-                <div class="level-labels">
-                  <span class="level">AA+</span>
-                  <span class="level">AAA+</span>
+          <div class="result-field">
+            <div class="inputs-row">
+              <div class="input-fields">
+                <div>
+                  <label for="foreground-color">Foreground color</label>
                 </div>
-                <div class="icons">
-                  <div class="pass">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      width="30px"
-                      height="100%"
-                      viewBox="0 -4 30 30"
-                      version="1.1"
-                    >
-                      <defs>
-                        <linearGradient
-                          x1="50%"
-                          y1="0%"
-                          x2="50%"
-                          y2="100%"
-                          id="linearGradient-1"
-                        >
-                          <stop stop-color="#1DD47F" offset="0%" />
-                          <stop stop-color="#0DA949" offset="100%" />
-                        </linearGradient>
-                      </defs>
-                      <g
-                        stroke="none"
-                        stroke-width="1"
-                        fill="none"
-                        fill-rule="evenodd"
+                <div class="input-items">
+                  <div id="swatch-one" class="swatch-one"></div>
+                  <input
+                    id="foreground-color"
+                    name="foreground-color"
+                    type="text"
+                    placeholder="rgb(255, 255, 255)"
+                  />
+                </div>
+              </div>
+              <div class="input-fields">
+                <div>
+                  <label for="background-color">Background color</label>
+                </div>
+                <div class="input-items">
+                  <div id="swatch-two" class="swatch-two"></div>
+                  <input
+                    id="background-color"
+                    name="background-color"
+                    type="text"
+                    placeholder="#000000"
+                  />
+                </div>
+              </div>
+            </div>
+            <div id="warning-box" class="error-box hidden">
+              <p class="error-text">
+                <i class="fas fa-exclamation-triangle"></i>
+                Invalid Input. Please check our
+                <a href="#How-does-it-work">How does it work?</a> for valid
+                color formats.
+              </p>
+            </div>
+            <div id="info-box" class="error-box hidden">
+              <p class="error-text">
+                <i class="fa fa-info-circle"></i>
+                Please make sure to fill both inputs with a valid color.
+              </p>
+            </div>
+            <h2 class="sr-only">Results</h2>
+            <div class="result-row">
+              <div class="ratio-result">
+                <div>
+                  <h3 class="text-small">Contrast Ratio</h3>
+                  <p id="contrast-ratio-result" class="large"></p>
+                </div>
+              </div>
+              <div class="check-result">
+                <div>
+                  <h3 class="text-small">Small Text</h3>
+                  <div class="level-labels">
+                    <span class="level">AA+</span>
+                    <span class="level">AAA+</span>
+                  </div>
+                  <div class="icons">
+                    <div class="pass">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        width="30px"
+                        height="100%"
+                        viewBox="0 -4 30 30"
+                        version="1.1"
                       >
+                        <defs>
+                          <linearGradient
+                            x1="50%"
+                            y1="0%"
+                            x2="50%"
+                            y2="100%"
+                            id="linearGradient-1"
+                          >
+                            <stop stop-color="#1DD47F" offset="0%" />
+                            <stop stop-color="#0DA949" offset="100%" />
+                          </linearGradient>
+                        </defs>
                         <g
-                          id="ui-gambling-website-lined-icnos-casinoshunter"
-                          transform="translate(-735.000000, -1911.000000)"
-                          fill="url(#linearGradient-1)"
-                          fill-rule="nonzero"
+                          stroke="none"
+                          stroke-width="1"
+                          fill="none"
+                          fill-rule="evenodd"
                         >
-                          <g transform="translate(50.000000, 1871.000000)">
-                            <path
-                              d="M714.442949,40.6265241 C715.185684,41.4224314 715.185684,42.6860985 714.442949,43.4820059 L697.746773,61.3734759 C697.314529,61.8366655 696.704235,62.0580167 696.097259,61.9870953 C695.539848,62.0082805 694.995328,61.7852625 694.600813,61.3625035 L685.557051,51.6712906 C684.814316,50.8753832 684.814316,49.6117161 685.557051,48.8158087 C686.336607,47.9804433 687.631056,47.9804433 688.410591,48.8157854 L696.178719,57.1395081 L711.589388,40.6265241 C712.368944,39.7911586 713.663393,39.7911586 714.442949,40.6265241 Z"
-                            />
+                          <g
+                            id="ui-gambling-website-lined-icnos-casinoshunter"
+                            transform="translate(-735.000000, -1911.000000)"
+                            fill="url(#linearGradient-1)"
+                            fill-rule="nonzero"
+                          >
+                            <g transform="translate(50.000000, 1871.000000)">
+                              <path
+                                d="M714.442949,40.6265241 C715.185684,41.4224314 715.185684,42.6860985 714.442949,43.4820059 L697.746773,61.3734759 C697.314529,61.8366655 696.704235,62.0580167 696.097259,61.9870953 C695.539848,62.0082805 694.995328,61.7852625 694.600813,61.3625035 L685.557051,51.6712906 C684.814316,50.8753832 684.814316,49.6117161 685.557051,48.8158087 C686.336607,47.9804433 687.631056,47.9804433 688.410591,48.8157854 L696.178719,57.1395081 L711.589388,40.6265241 C712.368944,39.7911586 713.663393,39.7911586 714.442949,40.6265241 Z"
+                              />
+                            </g>
                           </g>
                         </g>
-                      </g>
-                    </svg>
-                  </div>
-                  <div class="pass">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      width="30px"
-                      height="100%"
-                      viewBox="0 -4 30 30"
-                    >
-                      <defs>
-                        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%">
-                          <stop stop-color="#1DD47F" offset="0%" />
-                          <stop stop-color="#0DA949" offset="100%" />
-                        </linearGradient>
-                      </defs>
-                      <g
-                        stroke="none"
-                        stroke-width="1"
-                        fill="none"
-                        fill-rule="evenodd"
+                      </svg>
+                    </div>
+                    <div class="pass">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        width="30px"
+                        height="100%"
+                        viewBox="0 -4 30 30"
                       >
+                        <defs>
+                          <linearGradient x1="50%" y1="0%" x2="50%" y2="100%">
+                            <stop stop-color="#1DD47F" offset="0%" />
+                            <stop stop-color="#0DA949" offset="100%" />
+                          </linearGradient>
+                        </defs>
                         <g
-                          transform="translate(-735.000000, -1911.000000)"
-                          fill="url(#linearGradient-1)"
-                          fill-rule="nonzero"
+                          stroke="none"
+                          stroke-width="1"
+                          fill="none"
+                          fill-rule="evenodd"
                         >
-                          <g transform="translate(50.000000, 1871.000000)">
-                            <path
-                              d="M714.442949,40.6265241 C715.185684,41.4224314 715.185684,42.6860985 714.442949,43.4820059 L697.746773,61.3734759 C697.314529,61.8366655 696.704235,62.0580167 696.097259,61.9870953 C695.539848,62.0082805 694.995328,61.7852625 694.600813,61.3625035 L685.557051,51.6712906 C684.814316,50.8753832 684.814316,49.6117161 685.557051,48.8158087 C686.336607,47.9804433 687.631056,47.9804433 688.410591,48.8157854 L696.178719,57.1395081 L711.589388,40.6265241 C712.368944,39.7911586 713.663393,39.7911586 714.442949,40.6265241 Z"
-                            />
+                          <g
+                            transform="translate(-735.000000, -1911.000000)"
+                            fill="url(#linearGradient-1)"
+                            fill-rule="nonzero"
+                          >
+                            <g transform="translate(50.000000, 1871.000000)">
+                              <path
+                                d="M714.442949,40.6265241 C715.185684,41.4224314 715.185684,42.6860985 714.442949,43.4820059 L697.746773,61.3734759 C697.314529,61.8366655 696.704235,62.0580167 696.097259,61.9870953 C695.539848,62.0082805 694.995328,61.7852625 694.600813,61.3625035 L685.557051,51.6712906 C684.814316,50.8753832 684.814316,49.6117161 685.557051,48.8158087 C686.336607,47.9804433 687.631056,47.9804433 688.410591,48.8157854 L696.178719,57.1395081 L711.589388,40.6265241 C712.368944,39.7911586 713.663393,39.7911586 714.442949,40.6265241 Z"
+                              />
+                            </g>
                           </g>
                         </g>
-                      </g>
-                    </svg>
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="check-result">
-              <div>
-                <h3 class="text-small">Large Text</h3>
-                <div class="level-labels">
-                  <span class="level">AA+</span>
-                  <span class="level">AAA+</span>
-                </div>
-                <div class="icons">
-                  <div class="fail">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      version="1.1"
-                      width="30px"
-                      height="100%"
-                      viewBox="0 0 511.999 511.999"
-                      style="enable-background: new 0 0 511.999 511.999"
-                      xml:space="preserve"
-                    >
-                      <path
-                        style="fill: #ff6465"
-                        d="M384.955,256l120.28-120.28c9.019-9.019,9.019-23.642,0-32.66L408.94,6.765  c-9.019-9.019-23.642-9.019-32.66,0l-120.28,120.28L135.718,6.765c-9.019-9.019-23.642-9.019-32.66,0L6.764,103.058  c-9.019,9.019-9.019,23.642,0,32.66l120.28,120.28L6.764,376.28c-9.019,9.019-9.019,23.642,0,32.66l96.295,96.294  c9.019,9.019,23.642,9.019,32.66,0l120.28-120.28l120.28,120.28c9.019,9.019,23.642,9.019,32.66,0l96.295-96.294  c9.019-9.019,9.019-23.642,0-32.66L384.955,256z"
-                      />
-                    </svg>
+
+              <div class="check-result">
+                <div>
+                  <h3 class="text-small">Large Text</h3>
+                  <div class="level-labels">
+                    <span class="level">AA+</span>
+                    <span class="level">AAA+</span>
                   </div>
-                  <div class="fail">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      width="30px"
-                      height="100%"
-                      viewBox="0 0 511.999 511.999"
-                      style="enable-background: new 0 0 511.999 511.999"
-                      xml:space="preserve"
-                    >
-                      <path
-                        style="fill: #ff6465"
-                        d="M384.955,256l120.28-120.28c9.019-9.019,9.019-23.642,0-32.66L408.94,6.765  c-9.019-9.019-23.642-9.019-32.66,0l-120.28,120.28L135.718,6.765c-9.019-9.019-23.642-9.019-32.66,0L6.764,103.058  c-9.019,9.019-9.019,23.642,0,32.66l120.28,120.28L6.764,376.28c-9.019,9.019-9.019,23.642,0,32.66l96.295,96.294  c9.019,9.019,23.642,9.019,32.66,0l120.28-120.28l120.28,120.28c9.019,9.019,23.642,9.019,32.66,0l96.295-96.294  c9.019-9.019,9.019-23.642,0-32.66L384.955,256z"
-                      />
-                    </svg>
+                  <div class="icons">
+                    <div class="fail">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        version="1.1"
+                        width="30px"
+                        height="100%"
+                        viewBox="0 0 511.999 511.999"
+                        style="enable-background: new 0 0 511.999 511.999"
+                        xml:space="preserve"
+                      >
+                        <path
+                          style="fill: #ff6465"
+                          d="M384.955,256l120.28-120.28c9.019-9.019,9.019-23.642,0-32.66L408.94,6.765  c-9.019-9.019-23.642-9.019-32.66,0l-120.28,120.28L135.718,6.765c-9.019-9.019-23.642-9.019-32.66,0L6.764,103.058  c-9.019,9.019-9.019,23.642,0,32.66l120.28,120.28L6.764,376.28c-9.019,9.019-9.019,23.642,0,32.66l96.295,96.294  c9.019,9.019,23.642,9.019,32.66,0l120.28-120.28l120.28,120.28c9.019,9.019,23.642,9.019,32.66,0l96.295-96.294  c9.019-9.019,9.019-23.642,0-32.66L384.955,256z"
+                        />
+                      </svg>
+                    </div>
+                    <div class="fail">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        width="30px"
+                        height="100%"
+                        viewBox="0 0 511.999 511.999"
+                        style="enable-background: new 0 0 511.999 511.999"
+                        xml:space="preserve"
+                      >
+                        <path
+                          style="fill: #ff6465"
+                          d="M384.955,256l120.28-120.28c9.019-9.019,9.019-23.642,0-32.66L408.94,6.765  c-9.019-9.019-23.642-9.019-32.66,0l-120.28,120.28L135.718,6.765c-9.019-9.019-23.642-9.019-32.66,0L6.764,103.058  c-9.019,9.019-9.019,23.642,0,32.66l120.28,120.28L6.764,376.28c-9.019,9.019-9.019,23.642,0,32.66l96.295,96.294  c9.019,9.019,23.642,9.019,32.66,0l120.28-120.28l120.28,120.28c9.019,9.019,23.642,9.019,32.66,0l96.295-96.294  c9.019-9.019,9.019-23.642,0-32.66L384.955,256z"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="check-result">
-              <div>
-                <h3 class="text-small">Graphics</h3>
-                <div class="level-labels">
-                  <span class="level">AA+</span>
-                </div>
-                <div class="icons">
-                  <div class="pass">Icon</div>
+
+              <div class="check-result">
+                <div>
+                  <h3 class="text-small">Graphics</h3>
+                  <div class="level-labels">
+                    <span class="level">AA+</span>
+                  </div>
+                  <div class="icons">
+                    <div class="pass">Icon</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -227,12 +231,16 @@
             How does it work?
           </h2>
           <p>
-            Enter a foreground and background color in RGB hexadecimal format
-            (e.g., #000 or #FF00FF).
-            <br />
-            The Contrast Ratio Calculator will calculate the contrast, ranging
-            from 1 (no contrast) to 21 (black on white).
+            Enter a foreground and background color in one of the following
+            formats:
           </p>
+          <ul>
+            <li>HEX format: #AAAB1C</li>
+            <li>RGB format: rgb(100, 1, 233)</li>
+            <li>RGBA format: rgba(255, 78, 110, 0.7)</li>
+            <li>HSL format: hsl(240, 100%, 50%)</li>
+            <li>HSLA format: hsla(120, 100%, 25%, 0.3)</li>
+          </ul>
           <h2 class="letter-spacing">How much contrast do I need?</h2>
           <p>
             This tool follows the Web Content Accessibility Guidelines (WCAG),
