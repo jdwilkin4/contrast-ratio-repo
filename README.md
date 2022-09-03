@@ -16,6 +16,8 @@ The app evaluates the readability of page content by comparing the text(foregrou
 - CSS
 - JavaScript
 
+Please note: If you are not marked as a contributor for this project, then you will need to follow the first two steps. If you are marked as a contributor, then you can clone the repo git clone https://github.com/DBenMoshe/contrast-ratio-repo.git and then follow the rest of the steps in order.
+
 ## How to contribute
 
 1.  Fork the repo ([How to fork a repo instructions](https://docs.github.com/en/get-started/quickstart/fork-a-repo))
