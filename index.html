@@ -54,7 +54,20 @@
                 </div>
               </div>
             </div>
-
+            <div id="warning-box" class="error-box hidden">
+              <p class="error-text">
+                <i class="fas fa-exclamation-triangle"></i>
+                Invalid Input. Please check our
+                <a href="#How-does-it-work">How does it work?</a> for valid
+                color formats.
+              </p>
+            </div>
+            <div id="info-box" class="error-box hidden">
+              <p class="error-text">
+                <i class="fa fa-info-circle"></i>
+                Please make sure to fill both inputs with a valid color.
+              </p>
+            </div>
             <h2 class="sr-only">Results</h2>
             <div class="result-row">
               <div class="ratio-result">
@@ -150,14 +163,12 @@
                   </div>
                 </div>
               </div>
-
               <div class="check-result">
                 <div>
                   <h3 class="text-small">Large Text</h3>
                   <div class="level-labels">
                     <span class="level">AA+</span>
                     <span class="level">AAA+</span>
-
                   </div>
                   <div class="icons">
                     <div class="fail">
@@ -196,7 +207,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="check-result">
                 <div>
                   <h3 class="text-small">Graphics</h3>
@@ -215,7 +225,9 @@
 
       <section class="secondary">
         <div class="container">
-          <h2 class="letter-spacing">How does it work?</h2>
+          <h2 id="How-does-it-work" class="letter-spacing">
+            How does it work?
+          </h2>
           <p>
             Enter a foreground and background color in one of the following
             formats:

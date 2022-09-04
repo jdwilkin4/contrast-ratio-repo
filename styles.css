@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800;900");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css");
 
 *,
 *::before,
@@ -16,6 +17,12 @@
   --fail-border: #ff0000;
   --footer-bg: #555;
   --swatch-border: #000;
+  --warning-text: #9f6000;
+  --warning-bg: #feefb3;
+  --warning-link: #c77b09;
+  --warning-link-hover: #eb9617;
+  --info-text: #059;
+  --info-bg: #bef;
 }
 
 body {
@@ -92,11 +99,6 @@ footer p {
   text-align: center;
 }
 
-.error-message :first-child {
-  margin-bottom: -10px;
-  margin-top: -10px;
-}
-
 .large {
   margin: 0px;
   font-size: 2.5rem;
@@ -110,6 +112,45 @@ footer p {
   justify-content: center;
   gap: 1rem;
   margin: 0.5rem 0;
+}
+
+.error-box {
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 3px;
+  width: 80%;
+}
+
+#warning-box {
+  color: var(--warning-text);
+  background-color: var(--warning-bg);
+}
+
+.error-text {
+  font-size: 1rem;
+  margin: 5px 20px;
+  line-height: 1.5rem;
+}
+
+.error-text > i {
+  margin-right: 10px;
+}
+
+.error-text > a {
+  color: var(--warning-link);
+}
+
+.error-text > a:hover {
+  color: var(--warning-link-hover);
+}
+
+.hidden {
+  display: none;
+}
+
+#info-box {
+  color: var(--info-text);
+  background-color: var(--info-bg);
 }
 
 .result-row {
@@ -260,6 +301,10 @@ small {
     flex-direction: row;
     align-items: flex-start;
     gap: 1rem;
+  }
+
+  .error-box {
+    width: 70%;
   }
 }
 
