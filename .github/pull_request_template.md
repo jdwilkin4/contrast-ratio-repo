@@ -18,7 +18,7 @@ Fixes # (issue)
 
 ## Checklist
 
-- [] I have a descriptive title for my PR
-- [] I have linked this PR to the corresponding issue. [See how to do that here.](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
-- [] I have run the project locally and reviewed the code changes
-- [] My changes generate no new warnings
+- [ ] I have a descriptive title for my PR
+- [ ] I have linked this PR to the corresponding issue. [See how to do that here.](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
+- [ ] I have run the project locally and reviewed the code changes
+- [ ] My changes generate no new warnings
