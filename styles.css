@@ -9,9 +9,9 @@
 
 :root {
   --text-primary: #333;
-  --text-secondary: #7a7a7a;
+  --text-secondary: black;
   --text-light: #fff;
-  --primary-section: #f3f5f3;
+  --primary-section: white;
   --input-border: #d8d8da;
   --pass-border: #008000;
   --fail-border: #ff0000;
