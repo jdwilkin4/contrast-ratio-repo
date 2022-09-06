@@ -255,6 +255,7 @@ const displayResult = () => {
   //CASE two HSLs
   else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
+     hideErrorMessage(warning);
   }
   //CASE two named colors
   else if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
