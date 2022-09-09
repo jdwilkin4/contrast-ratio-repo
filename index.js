@@ -34,24 +34,6 @@ const rgbInputToRGBNumbers = (rgbColor) => {
   return [R, G, B];
 };
 
-// Determine the equivalent opaque RGB color
-// for a given partially transparent RGB color against a white background
-const rgbaToCloseRGB = (rgbaColor) => {
-  const bg = [255, 255, 255];
-  const [R, G, B, o] = rgbaColor
-    .replace(/[^\d,.]/g, "")
-    .split(",")
-    .map((el) => parseFloat(el));
-  // Y = p * T + (1 - p) * B , where:
-  // p is the opacity of the top layer
-  // T is the rgb number of the top layer color
-  // B is the rgb number of the fully opaque bottom layer
-  // Y is the rgb number of the equivalent fully opaque color
-  return [R, G, B].map((colFg, idx) =>
-    Math.ceil(o * colFg + (1 - o) * bg[idx])
-  );
-};
-
 const hslToRGB = (hslColor) => {
   const dataForCalculation = hslColor
     .replace(/[\(\)\sA-Za-z%]/g, "")
@@ -84,14 +66,6 @@ const hslToRGB = (hslColor) => {
   return RGBresult.map((RGBvalue) =>
     Math.round((RGBvalue + adjustLightness) * 255)
   );
-};
-
-const hslaToCloseRGB = (hslaColor) => {
-  const formattedHSLA = hslaColor.replace(/[\(\)\sA-Za-z%]/g, "").split(",");
-  const opacity = formattedHSLA.pop();
-  const hslaToRGBA =
-    hslToRGB(formattedHSLA.join(",")).join(",") + `,${opacity}`;
-  return rgbaToCloseRGB(hslaToRGBA);
 };
 
 const getLuminance = (RGBarray) => {
@@ -219,15 +193,6 @@ const displayResult = () => {
     }
   }
 
-  // CASE two RGBAs
-  else if (rgbaRegex.test(firstColor) && rgbaRegex.test(secondColor)) {
-    ratioResult.innerHTML = colorFormatRatio(
-      firstColor,
-      secondColor,
-      rgbaToCloseRGB
-    );
-  }
-
   // CASE two RGBs
   else if (isNotEmpty(firstColor) && isNotEmpty(secondColor)) {
     if (isValidRGB(firstColor) && isValidRGB(secondColor)) {
@@ -242,20 +207,10 @@ const displayResult = () => {
   } else {
     showErrorMessage(info);
   }
-
-  //CASE two HSLAs
-  // Changed else if to if
-  if (hslaRegex.test(firstColor) && hslaRegex.test(secondColor)) {
-    ratioResult.innerHTML = colorFormatRatio(
-      firstColor,
-      secondColor,
-      hslaToCloseRGB
-    );
-  }
   //CASE two HSLs
-  else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
+  if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
-     hideErrorMessage(warning);
+    hideErrorMessage(warning);
   }
   //CASE two named colors
   else if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
