@@ -10,9 +10,8 @@ const info = document.getElementById("info-box");
 
 const hexRegex = /^#([A-Fa-f0-9]{6})$/;
 const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
-const rgbaRegex = /^rgba.*/i;
 const hslRegex = /^hsl.*/i;
-const hslaRegex = /^hsla.*/i;
+
 const isItNamedColor = (color) => namesAndRGBValues.hasOwnProperty(color);
 
 const shortToFullHex = (hexColor) => {
