@@ -139,9 +139,7 @@ const updateSwatchColor = (swatch, color) => {
   if (
     hexRegex.test(color) ||
     isValidRGB(color) ||
-    rgbaRegex.test(color) ||
     hslRegex.test(color) ||
-    hslaRegex.test(color) ||
     hexRegex3Digit.test(color) ||
     isItNamedColor(color)
   ) {
