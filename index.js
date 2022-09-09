@@ -7,6 +7,7 @@ const backgroundSwatch = document.getElementById("swatch-two");
 const ratioResult = document.getElementById("contrast-ratio-result");
 const warning = document.getElementById("warning-box");
 const info = document.getElementById("info-box");
+const uiAA = document.getElementById("uiAA");
 
 const hexRegex = /^#([A-Fa-f0-9]{6})$/;
 const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
@@ -188,6 +189,29 @@ const handleChange = () => {
   displayColor();
 };
 
+const setCheck = (element, className) => {
+  element.setAttribute("class", className);
+  element.innerText = className;
+};
+
+const resetCheck = (element) => {
+  element.removeAttribute("class");
+  element.innerText = "";
+};
+
+const displayChecks = () => {
+  const ratio = parseFloat(ratioResult.innerText);
+  if (!isNaN(ratio)) {
+    if (ratio >= 3) {
+      setCheck(uiAA, "pass");
+    } else {
+      setCheck(uiAA, "fail");
+    }
+  } else {
+    resetCheck(uiAA);
+  }
+};
+
 const displayResult = () => {
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
@@ -255,7 +279,7 @@ const displayResult = () => {
   //CASE two HSLs
   else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
-     hideErrorMessage(warning);
+    hideErrorMessage(warning);
   }
   //CASE two named colors
   else if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
@@ -264,6 +288,8 @@ const displayResult = () => {
       namesAndRGBValues[secondColor]
     );
   }
+
+  displayChecks();
 };
 
 foregroundColor.oninput = handleChange;
