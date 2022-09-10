@@ -160,7 +160,6 @@ const hideErrorMessage = (div) => {
 const clearErrors = () => {
   hideErrorMessage(warning);
   hideErrorMessage(info);
-  ratioResult.innerHTML = "";
 };
 
 const updateSwatchColor = (swatch, color) => {
@@ -182,11 +181,6 @@ const displayColor = () => {
   let secondColor = backgroundColor.value;
   updateSwatchColor(foregroundSwatch, firstColor);
   updateSwatchColor(backgroundSwatch, secondColor);
-};
-
-const handleChange = () => {
-  clearErrors();
-  displayColor();
 };
 
 const setCheck = (element, className) => {
@@ -212,7 +206,7 @@ const displayChecks = () => {
   }
 };
 
-const displayResult = () => {
+const displayRatioResult = () => {
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
 
@@ -288,7 +282,17 @@ const displayResult = () => {
       namesAndRGBValues[secondColor]
     );
   }
+};
 
+const handleChange = () => {
+  ratioResult.innerHTML = "";
+  clearErrors();
+  displayColor();
+  resetCheck(uiAA);
+};
+
+const displayResult = () => {
+  displayRatioResult();
   displayChecks();
 };
 
