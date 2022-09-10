@@ -149,6 +149,11 @@ const isValidRGB = (color) => {
 
 const isValidHSL = (color) => {
   const hslRegex = /^hsl.*/i;
+  if (hslRegex.test(color)) {
+    return hslNumbers(color).every((item, index) => {
+      return index === 0 ? 0 <= item && item <= 360 : 0 <= item && item <= 1;
+    });
+  } else return false;
 };
 
 const isNotEmpty = (value) => {
@@ -174,7 +179,7 @@ const updateSwatchColor = (swatch, color) => {
     hexRegex.test(color) ||
     isValidRGB(color) ||
     rgbaRegex.test(color) ||
-    hslRegex.test(color) ||
+    isValidHSL(color) ||
     hslaRegex.test(color) ||
     hexRegex3Digit.test(color) ||
     isItNamedColor(color)
