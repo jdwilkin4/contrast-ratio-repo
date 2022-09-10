@@ -11,7 +11,6 @@ const info = document.getElementById("info-box");
 const hexRegex = /^#([A-Fa-f0-9]{6})$/;
 const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
 const rgbaRegex = /^rgba.*/i;
-const hslRegex = /^hsl.*/i;
 const hslaRegex = /^hsla.*/i;
 const isItNamedColor = (color) => namesAndRGBValues.hasOwnProperty(color);
 
@@ -52,13 +51,17 @@ const rgbaToCloseRGB = (rgbaColor) => {
   );
 };
 
-const hslToRGB = (hslColor) => {
-  const dataForCalculation = hslColor
+const hslNumbers = (hslColor) => {
+  return hslColor
     .replace(/[\(\)\sA-Za-z%]/g, "")
     .split(",")
     .map((hslValue, index) => {
       return index === 0 ? Number(hslValue) : Number(hslValue) / 100;
     });
+};
+
+const hslToRGB = (hslColor) => {
+  const dataForCalculation = hslNumbers(hslColor);
   //C = (1 - |2L - 1|) * S
   const Chroma =
     (1 - Math.abs(2 * dataForCalculation[2] - 1)) * dataForCalculation[1];
@@ -142,6 +145,10 @@ const isValidRGB = (color) => {
   if (rgbRegex.test(color)) {
     return rgbInputToRGBNumbers(color).every((v) => 0 <= v && v <= 255);
   } else return false;
+};
+
+const isValidHSL = (color) => {
+  const hslRegex = /^hsl.*/i;
 };
 
 const isNotEmpty = (value) => {
@@ -255,7 +262,7 @@ const displayResult = () => {
   //CASE two HSLs
   else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
-     hideErrorMessage(warning);
+    hideErrorMessage(warning);
   }
   //CASE two named colors
   else if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
