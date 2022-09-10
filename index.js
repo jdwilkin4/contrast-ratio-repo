@@ -265,12 +265,21 @@ const displayResult = () => {
     );
   }
   //CASE two HSLs
-  else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
-    ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
-    hideErrorMessage(warning);
+  else if (isNotEmpty(firstColor) && isNotEmpty(secondColor)) {
+    if (isValidHSL(firstColor) && isValidHSL(secondColor)) {
+      ratioResult.innerHTML = colorFormatRatio(
+        firstColor,
+        secondColor,
+        hslToRGB
+      );
+    } else {
+      showErrorMessage(warning);
+    }
+  } else {
+    showErrorMessage(info);
   }
   //CASE two named colors
-  else if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
+  if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
     ratioResult.innerHTML = calculateRatio(
       namesAndRGBValues[firstColor],
       namesAndRGBValues[secondColor]
