@@ -307,7 +307,7 @@ small {
     flex-direction: row;
     align-items: flex-start;
     gap: 2rem;
-}
+  }
   .result-row {
     flex-direction: row;
     align-items: flex-start;

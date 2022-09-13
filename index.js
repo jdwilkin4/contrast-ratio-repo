@@ -188,15 +188,20 @@ const displayResult = () => {
         hexToRGB
       );
     }
-  }
-
-  // CASE two RGBs
-  else if (isNotEmpty(firstColor) && isNotEmpty(secondColor)) {
+  } else if (isNotEmpty(firstColor) && isNotEmpty(secondColor)) {
+    // CASE two RGBs
     if (isValidRGB(firstColor) && isValidRGB(secondColor)) {
       ratioResult.innerHTML = colorFormatRatio(
         firstColor,
         secondColor,
         rgbInputToRGBNumbers
+      );
+    }
+    //CASE two named colors
+    else if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
+      ratioResult.innerHTML = calculateRatio(
+        namesAndRGBValues[firstColor],
+        namesAndRGBValues[secondColor]
       );
     } else {
       showErrorMessage(warning);
@@ -208,13 +213,6 @@ const displayResult = () => {
   if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
     hideErrorMessage(warning);
-  }
-  //CASE two named colors
-  else if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
-    ratioResult.innerHTML = calculateRatio(
-      namesAndRGBValues[firstColor],
-      namesAndRGBValues[secondColor]
-    );
   }
 };
 
