@@ -7,7 +7,7 @@ const backgroundSwatch = document.getElementById("swatch-two");
 const ratioResult = document.getElementById("contrast-ratio-result");
 const warning = document.getElementById("warning-box");
 const info = document.getElementById("info-box");
-const uiAA = document.getElementById("uiAA");
+const graphicsAA = document.getElementById("graphicsAA");
 
 const hexRegex = /^#([A-Fa-f0-9]{6})$/;
 const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
@@ -155,12 +155,12 @@ const displayColor = () => {
 };
 
 const setCheck = (element, className) => {
-  element.setAttribute("class", className);
-  element.innerText = className;
+  element.classList.add(className);
+  element.innerText = element.classList.contains("pass") ? "pass" : "fail";
 };
 
 const resetCheck = (element) => {
-  element.removeAttribute("class");
+  element.classList.remove("pass", "fail");
   element.innerText = "";
 };
 
@@ -168,12 +168,12 @@ const displayChecks = () => {
   const ratio = parseFloat(ratioResult.innerText);
   if (!isNaN(ratio)) {
     if (ratio >= 3) {
-      setCheck(uiAA, "pass");
+      setCheck(graphicsAA, "pass");
     } else {
-      setCheck(uiAA, "fail");
+      setCheck(graphicsAA, "fail");
     }
   } else {
-    resetCheck(uiAA);
+    resetCheck(graphicsAA);
   }
 };
 
@@ -238,7 +238,7 @@ const handleChange = () => {
   ratioResult.innerHTML = "";
   clearErrors();
   displayColor();
-  resetCheck(uiAA);
+  resetCheck(graphicsAA);
 };
 
 const displayResult = () => {
