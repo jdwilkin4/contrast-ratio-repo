@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DBenMoshe/contrast-ratio-repo.git"
+    "url": "git+https://github.com/jdwilkin4/contrast-ratio-repo.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DBenMoshe/contrast-ratio-repo/issues"
+    "url": "https://github.com/jdwilkin4/contrast-ratio-repo/issues"
   },
-  "homepage": "https://github.com/DBenMoshe/contrast-ratio-repo#readme",
+  "homepage": "https://github.com/jdwilkin4/contrast-ratio-repo#readme",
   "devDependencies": {
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",

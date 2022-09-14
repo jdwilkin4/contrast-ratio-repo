@@ -11,9 +11,8 @@ const uiAA = document.getElementById("uiAA");
 
 const hexRegex = /^#([A-Fa-f0-9]{6})$/;
 const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
-const rgbaRegex = /^rgba.*/i;
 const hslRegex = /^hsl.*/i;
-const hslaRegex = /^hsla.*/i;
+
 const isItNamedColor = (color) => namesAndRGBValues.hasOwnProperty(color);
 
 const shortToFullHex = (hexColor) => {
@@ -33,24 +32,6 @@ const rgbInputToRGBNumbers = (rgbColor) => {
     .split(",")
     .map((RGBValue) => parseInt(RGBValue));
   return [R, G, B];
-};
-
-// Determine the equivalent opaque RGB color
-// for a given partially transparent RGB color against a white background
-const rgbaToCloseRGB = (rgbaColor) => {
-  const bg = [255, 255, 255];
-  const [R, G, B, o] = rgbaColor
-    .replace(/[^\d,.]/g, "")
-    .split(",")
-    .map((el) => parseFloat(el));
-  // Y = p * T + (1 - p) * B , where:
-  // p is the opacity of the top layer
-  // T is the rgb number of the top layer color
-  // B is the rgb number of the fully opaque bottom layer
-  // Y is the rgb number of the equivalent fully opaque color
-  return [R, G, B].map((colFg, idx) =>
-    Math.ceil(o * colFg + (1 - o) * bg[idx])
-  );
 };
 
 const hslToRGB = (hslColor) => {
@@ -85,14 +66,6 @@ const hslToRGB = (hslColor) => {
   return RGBresult.map((RGBvalue) =>
     Math.round((RGBvalue + adjustLightness) * 255)
   );
-};
-
-const hslaToCloseRGB = (hslaColor) => {
-  const formattedHSLA = hslaColor.replace(/[\(\)\sA-Za-z%]/g, "").split(",");
-  const opacity = formattedHSLA.pop();
-  const hslaToRGBA =
-    hslToRGB(formattedHSLA.join(",")).join(",") + `,${opacity}`;
-  return rgbaToCloseRGB(hslaToRGBA);
 };
 
 const getLuminance = (RGBarray) => {
@@ -166,9 +139,7 @@ const updateSwatchColor = (swatch, color) => {
   if (
     hexRegex.test(color) ||
     isValidRGB(color) ||
-    rgbaRegex.test(color) ||
     hslRegex.test(color) ||
-    hslaRegex.test(color) ||
     hexRegex3Digit.test(color) ||
     isItNamedColor(color)
   ) {
@@ -235,24 +206,20 @@ const displayRatioResult = () => {
         hexToRGB
       );
     }
-  }
-
-  // CASE two RGBAs
-  else if (rgbaRegex.test(firstColor) && rgbaRegex.test(secondColor)) {
-    ratioResult.innerHTML = colorFormatRatio(
-      firstColor,
-      secondColor,
-      rgbaToCloseRGB
-    );
-  }
-
-  // CASE two RGBs
-  else if (isNotEmpty(firstColor) && isNotEmpty(secondColor)) {
+  } else if (isNotEmpty(firstColor) && isNotEmpty(secondColor)) {
+    // CASE two RGBs
     if (isValidRGB(firstColor) && isValidRGB(secondColor)) {
       ratioResult.innerHTML = colorFormatRatio(
         firstColor,
         secondColor,
         rgbInputToRGBNumbers
+      );
+    }
+    //CASE two named colors
+    else if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
+      ratioResult.innerHTML = calculateRatio(
+        namesAndRGBValues[firstColor],
+        namesAndRGBValues[secondColor]
       );
     } else {
       showErrorMessage(warning);
@@ -260,27 +227,10 @@ const displayRatioResult = () => {
   } else {
     showErrorMessage(info);
   }
-
-  //CASE two HSLAs
-  // Changed else if to if
-  if (hslaRegex.test(firstColor) && hslaRegex.test(secondColor)) {
-    ratioResult.innerHTML = colorFormatRatio(
-      firstColor,
-      secondColor,
-      hslaToCloseRGB
-    );
-  }
   //CASE two HSLs
-  else if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
+  if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
     ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
     hideErrorMessage(warning);
-  }
-  //CASE two named colors
-  else if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
-    ratioResult.innerHTML = calculateRatio(
-      namesAndRGBValues[firstColor],
-      namesAndRGBValues[secondColor]
-    );
   }
 };
 
