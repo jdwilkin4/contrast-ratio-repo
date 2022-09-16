@@ -328,10 +328,6 @@ small {
     padding-right: 40px;
     margin-left: -10px;
   }
-   .ratio-result{
-    padding-left: 40px;
-    margin-top: -15px;
-  }
    .result-row {
     flex-direction: row;
     align-items: flex-start;
