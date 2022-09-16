@@ -215,15 +215,9 @@ const displayResult = () => {
         namesAndRGBValues[firstColor],
         namesAndRGBValues[secondColor]
       );
-    } else {
-      showErrorMessage(warning);
     }
-  } else {
-    showErrorMessage(info);
-  }
-  //CASE two HSLs
-  if (isNotEmpty(firstColor) && isNotEmpty(secondColor)) {
-    if (isValidHSL(firstColor) && isValidHSL(secondColor)) {
+    //CASE two HSL
+    else if (isValidHSL(firstColor) && isValidHSL(secondColor)) {
       ratioResult.innerHTML = colorFormatRatio(
         firstColor,
         secondColor,
