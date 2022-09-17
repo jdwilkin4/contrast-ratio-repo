@@ -33,16 +33,13 @@ const rgbInputToRGBNumbers = (rgbColor) => {
 };
 
 const hslNumbers = (hslColor) => {
-  return hslColor
-    .replace(/[\(\)\sA-Za-z%]/g, "")
-    .split(",")
-    .map((hslValue, index) => {
-      return index === 0 ? Number(hslValue) : Number(hslValue) / 100;
-    });
+  return hslColor.replace(/[\(\)\sA-Za-z%]/g, "").split(",");
 };
 
 const hslToRGB = (hslColor) => {
-  const dataForCalculation = hslNumbers(hslColor);
+  const dataForCalculation = hslNumbers(hslColor).map((hslValue, index) => {
+    return index === 0 ? Number(hslValue) : Number(hslValue) / 100;
+  });
   //C = (1 - |2L - 1|) * S
   const Chroma =
     (1 - Math.abs(2 * dataForCalculation[2] - 1)) * dataForCalculation[1];
@@ -124,7 +121,7 @@ const isValidHSL = (color) => {
   const hslRegex = /^hsl\s?\(\s?\d{1,3},\s?\d{1,3}%,\s?\d{1,3}%\)$/i;
   if (hslRegex.test(color)) {
     return hslNumbers(color).every((item, index) => {
-      return index === 0 ? 0 <= item && item <= 360 : 0 <= item && item <= 1;
+      return index === 0 ? 0 <= item && item <= 360 : 0 <= item && item <= 100;
     });
   } else return false;
 };
