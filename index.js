@@ -120,9 +120,13 @@ const isValidRGB = (color) => {
 const isValidHSL = (color) => {
   const hslRegex = /^hsl\s?\(\s?\d{1,3},\s?\d{1,3}%,\s?\d{1,3}%\)$/i;
   if (hslRegex.test(color)) {
-    return hslNumbers(color).every((item, index) => {
-      return index === 0 ? 0 <= item && item <= 360 : 0 <= item && item <= 100;
-    });
+    return hslNumbers(color)
+      .map((el) => Number(el))
+      .every((item, index) => {
+        return index === 0
+          ? 0 <= item && item <= 360
+          : 0 <= item && item <= 100;
+      });
   } else return false;
 };
 
