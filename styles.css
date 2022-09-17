@@ -61,6 +61,7 @@ input {
   border-radius: 0.375rem;
   border: none;
   background-color: var(--primary-section);
+  width: 90%;
 }
 
 footer {
@@ -159,6 +160,7 @@ footer p {
   align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
+  column-gap: 10%;
 }
 
 .ratio-result,
@@ -205,11 +207,12 @@ footer p {
 .input-items {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   border: 1px solid var(--input-border);
   padding: 0.5rem;
   border-radius: 10px;
   margin: 0.3rem 0;
+  width: 100%;
 }
 
 .input-fields {
@@ -304,17 +307,6 @@ small {
   .page-title {
     font-size: 2.9rem;
   }
-  .checks-field {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 2rem;
-  }
-  .result-row {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
   .error-box {
     width: 70%;
   }
@@ -330,4 +322,15 @@ small {
   .input-items {
     align-self: center;
   }
-}
+   .checks-field {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-right: 40px;
+    margin-left: -10px;
+  }
+   .result-row {
+    flex-direction: row;
+    align-items: flex-start;
+  } 
+};
