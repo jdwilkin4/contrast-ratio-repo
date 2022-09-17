@@ -7,6 +7,7 @@ const backgroundSwatch = document.getElementById("swatch-two");
 const ratioResult = document.getElementById("contrast-ratio-result");
 const warning = document.getElementById("warning-box");
 const info = document.getElementById("info-box");
+const graphicsAA = document.getElementById("graphicsAA");
 
 const hexRegex = /^#([A-Fa-f0-9]{6})$/;
 const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
@@ -132,7 +133,6 @@ const hideErrorMessage = (div) => {
 const clearErrors = () => {
   hideErrorMessage(warning);
   hideErrorMessage(info);
-  ratioResult.innerHTML = "";
 };
 
 const updateSwatchColor = (swatch, color) => {
@@ -154,12 +154,30 @@ const displayColor = () => {
   updateSwatchColor(backgroundSwatch, secondColor);
 };
 
-const handleChange = () => {
-  clearErrors();
-  displayColor();
+const setCheck = (element, className) => {
+  element.classList.add(className);
+  element.innerText = element.classList.contains("pass") ? "pass" : "fail";
 };
 
-const displayResult = () => {
+const resetCheck = (element) => {
+  element.classList.remove("pass", "fail");
+  element.innerText = "";
+};
+
+const displayChecks = () => {
+  const ratio = parseFloat(ratioResult.innerText);
+  if (!isNaN(ratio)) {
+    if (ratio >= 3) {
+      setCheck(graphicsAA, "pass");
+    } else {
+      setCheck(graphicsAA, "fail");
+    }
+  } else {
+    resetCheck(graphicsAA);
+  }
+};
+
+const displayRatioResult = () => {
   let firstColor = foregroundColor.value;
   let secondColor = backgroundColor.value;
 
@@ -214,6 +232,18 @@ const displayResult = () => {
     ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
     hideErrorMessage(warning);
   }
+};
+
+const handleChange = () => {
+  ratioResult.innerHTML = "";
+  clearErrors();
+  displayColor();
+  resetCheck(graphicsAA);
+};
+
+const displayResult = () => {
+  displayRatioResult();
+  displayChecks();
 };
 
 foregroundColor.oninput = handleChange;

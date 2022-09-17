@@ -13,7 +13,7 @@
   --text-light: #fff;
   --primary-section: white;
   --input-border: #d8d8da;
-  --pass-border: #008000;
+  --pass-border: #039543;
   --fail-border: #ff0000;
   --footer-bg: #555;
   --swatch-border: #000;
@@ -187,7 +187,7 @@ footer p {
 }
 
 .level-labels {
-  margin: 1.5rem 0 1rem 0;
+  margin: 1.5rem 0;
   display: flex;
   justify-content: space-around;
   font-variation-settings: "wght" 600;
@@ -197,7 +197,7 @@ footer p {
   width: 3rem;
 }
 
-.icons {
+.checks {
   margin: 1rem 0;
   display: flex;
   justify-content: space-around;
@@ -247,21 +247,22 @@ footer p {
 .pass,
 .fail {
   display: inline-block;
-  width: 2.5rem;
-  height: 2.5rem;
   border-radius: 50%;
   text-align: center;
-  vertical-align: 50%;
+  padding: 0.3rem 0.7rem;
+  margin: 0 0.2rem;
 }
 
 .pass {
-  border: 1px solid var(--pass-border);
-  color: var(--pass-border);
+  color: var(--text-light);
+  background-color: var(--pass-border);
+  font-variation-settings: "wght" 500;
 }
 
 .fail {
   border: 1px solid var(--fail-border);
   color: var(--fail-border);
+  font-variation-settings: "wght" 700;
 }
 
 .secondary .container h2 {
