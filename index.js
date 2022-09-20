@@ -11,7 +11,6 @@ const graphicsAA = document.getElementById("graphicsAA");
 
 const hexRegex = /^#([A-Fa-f0-9]{6})$/;
 const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
-const hslRegex = /^hsl.*/i;
 
 const isItNamedColor = (color) => namesAndRGBValues.hasOwnProperty(color);
 
@@ -34,13 +33,17 @@ const rgbInputToRGBNumbers = (rgbColor) => {
   return [R, G, B];
 };
 
-const hslToRGB = (hslColor) => {
-  const dataForCalculation = hslColor
+const hslNumbers = (hslColor) => {
+  return hslColor
     .replace(/[\(\)\sA-Za-z%]/g, "")
     .split(",")
-    .map((hslValue, index) => {
-      return index === 0 ? Number(hslValue) : Number(hslValue) / 100;
-    });
+    .map((el) => Number(el));
+};
+
+const hslToRGB = (hslColor) => {
+  const dataForCalculation = hslNumbers(hslColor).map((hslValue, index) => {
+    return index === 0 ? hslValue : hslValue / 100;
+  });
   //C = (1 - |2L - 1|) * S
   const Chroma =
     (1 - Math.abs(2 * dataForCalculation[2] - 1)) * dataForCalculation[1];
@@ -118,6 +121,15 @@ const isValidRGB = (color) => {
   } else return false;
 };
 
+const isValidHSL = (color) => {
+  const hslRegex = /^hsl\s?\(\s?\d{1,3},\s?\d{1,3}%,\s?\d{1,3}%\)$/i;
+  if (hslRegex.test(color)) {
+    return hslNumbers(color).every((item, index) => {
+      return index === 0 ? 0 <= item && item <= 360 : 0 <= item && item <= 100;
+    });
+  } else return false;
+};
+
 const isNotEmpty = (value) => {
   return value !== null && value !== "";
 };
@@ -139,7 +151,7 @@ const updateSwatchColor = (swatch, color) => {
   if (
     hexRegex.test(color) ||
     isValidRGB(color) ||
-    hslRegex.test(color) ||
+    isValidHSL(color) ||
     hexRegex3Digit.test(color) ||
     isItNamedColor(color)
   ) {
@@ -221,16 +233,19 @@ const displayRatioResult = () => {
         namesAndRGBValues[firstColor],
         namesAndRGBValues[secondColor]
       );
+    }
+    //CASE two HSL
+    else if (isValidHSL(firstColor) && isValidHSL(secondColor)) {
+      ratioResult.innerHTML = colorFormatRatio(
+        firstColor,
+        secondColor,
+        hslToRGB
+      );
     } else {
       showErrorMessage(warning);
     }
   } else {
     showErrorMessage(info);
-  }
-  //CASE two HSLs
-  if (hslRegex.test(firstColor) && hslRegex.test(secondColor)) {
-    ratioResult.innerHTML = colorFormatRatio(firstColor, secondColor, hslToRGB);
-    hideErrorMessage(warning);
   }
 };
 
