@@ -188,6 +188,43 @@ const displayChecks = () => {
     resetCheck(graphicsAA);
   }
 };
+const setTextStatus = (element, className, text) => {
+  element.classList.add(className);
+  element.innerText = text
+};
+const handleTextStatus = () => {
+  let contrastScore = ratioResult.innerText
+  let checkIcon = document.querySelectorAll(".checks")
+  if(contrastScore == 0) {
+    checkIcon.forEach(item => resetCheck(item))
+  }else{
+  if(contrastScore >= 3 && contrastScore < 4.5) {
+    checkIcon.forEach(item => {
+        if(item.classList.contains("AA-large")) {
+          setTextStatus(item,"pass", "Pass");
+        }else {
+          setTextStatus(item,"fail", "Fail");
+        }
+      });
+    }else if(contrastScore >= 4.5 && contrastScore < 7) {
+      checkIcon.forEach(x => {
+      if(item.classList.contains("AAA-small")) {
+        setTextStatus(item,"fail", "Fail");
+      }else {
+        setTextStatus(item,"pass", "Pass");
+      }
+    })
+    }else if(contrastScore >= 7) {
+      checkIcon.forEach(item => {
+      setTextStatus(item,"pass", "Pass");
+    });
+    }else {
+      checkIcon.forEach(item => {
+        setTextStatus(item,"fail", "Fail");
+      });
+    }
+  }
+};
 
 const displayRatioResult = () => {
   let firstColor = foregroundColor.value;
@@ -254,11 +291,13 @@ const handleChange = () => {
   clearErrors();
   displayColor();
   resetCheck(graphicsAA);
+  handleTextStatus()
 };
 
 const displayResult = () => {
   displayRatioResult();
   displayChecks();
+  handleTextStatus()
 };
 
 foregroundColor.oninput = handleChange;
