@@ -198,33 +198,23 @@ const handleTextStatus = () => {
   if(contrastScore == 0) {
     checkIcon.forEach(item => resetCheck(item))
   }else{
-  if(contrastScore >= 3 && contrastScore < 4.5) {
     checkIcon.forEach(item => {
-        if(item.classList.contains("AA-large")) {
-          setTextStatus(item,"pass", "Pass");
-        }else {
+      if(contrastScore >= 3 && contrastScore < 4.5) {
+        item.classList.contains("AA-large") ?
+          setTextStatus(item,"pass", "Pass"): 
           setTextStatus(item,"fail", "Fail");
-        }
-      });
-    }else if(contrastScore >= 4.5 && contrastScore < 7) {
-      checkIcon.forEach(item => {
-      if(item.classList.contains("AAA-small")) {
-        setTextStatus(item,"fail", "Fail");
-      }else {
+        }else if(contrastScore >= 4.5 && contrastScore < 7) {
+        item.classList.contains("AAA-small") ?
+          setTextStatus(item,"fail", "Fail"):
+          setTextStatus(item,"pass", "Pass");
+        }else if(contrastScore >= 7){
         setTextStatus(item,"pass", "Pass");
-      }
-    })
-    }else if(contrastScore >= 7) {
-      checkIcon.forEach(item => {
-      setTextStatus(item,"pass", "Pass");
-    });
-    }else {
-      checkIcon.forEach(item => {
+      }else {
         setTextStatus(item,"fail", "Fail");
+      };   
       });
-    }
-  }
-};
+    };
+  };
 
 const displayRatioResult = () => {
   let firstColor = foregroundColor.value;
