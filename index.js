@@ -207,7 +207,7 @@ const handleTextStatus = () => {
         }
       });
     }else if(contrastScore >= 4.5 && contrastScore < 7) {
-      checkIcon.forEach(x => {
+      checkIcon.forEach(item => {
       if(item.classList.contains("AAA-small")) {
         setTextStatus(item,"fail", "Fail");
       }else {
