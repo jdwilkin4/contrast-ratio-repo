@@ -15,9 +15,6 @@ const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
 const isItNamedColor = (color) => namesAndRGBValues.hasOwnProperty(color);
 
 const shortToFullHex = (hexColor) => {
-  // hexColor = "#FFFFFF"
-  // The "#" character needs to be removed
-  // It can be done by using Array.slice() method
   return [...hexColor]
     .slice(1)
     .map((x, index) => x + x)
@@ -213,23 +210,22 @@ const displayChecks = () => {
 const getRGBfromColor = (color) => {
   color = color.trim().toLowerCase();
 
-  // check if shorthand HEX
   if (hexRegex3Digit.test(color)) {
     return hexToRGB(shortToFullHex(color));
   }
-  // check if full HEX
+  
   if (hexRegex.test(color)) {
     return hexToRGB(color);
   }
-  // check if HSL
+
   if (isValidHSL(color)) {
     return hslToRGB(color);
   }
-  // check if RGB
+
   if (isValidRGB(color)) {
     return rgbInputToRGBNumbers(color);
   }
-  // check if named color
+
   if (color in namesAndRGBValues) {
     return namesAndRGBValues[color];
   }
@@ -247,7 +243,6 @@ const displayRatioResult = () => {
     // success, calculate and display result
     ratioResult.innerHTML = calculateRatio(fgColor, bgColor);
   } else {
-    // failure, display warning
     showErrorMessage(warning);
   }
 };
