@@ -333,4 +333,13 @@ small {
     flex-direction: row;
     align-items: flex-start;
   } 
-};
+  .checks-container {
+    display: flex;
+  }
+}
+
+@media(max-width: 768px) {
+  .checks-container {
+    display: flex;
+  }
+}
