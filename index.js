@@ -234,13 +234,13 @@ const getRGBfromColor = (color) => {
 };
 
 const displayRatioResult = () => {
-  // convert both color name representations to their
-  // respective RGB values
+  // do nothing when any of the two inputs is empty
+  if (!(foregroundColor.value && backgroundColor.value)) return
+
   let fgColor = getRGBfromColor(foregroundColor.value);
   let bgColor = getRGBfromColor(backgroundColor.value);
-  // check if both colors where coverted successfully
+  
   if (fgColor != null && bgColor != null) {
-    // success, calculate and display result
     ratioResult.innerHTML = calculateRatio(fgColor, bgColor);
   } else {
     showErrorMessage(warning);
