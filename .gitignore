@@ -11,3 +11,6 @@
 
 # misc
 .DS_Store
+
+# VS Code workspace settings
+.code-workspace

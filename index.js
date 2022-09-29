@@ -15,7 +15,13 @@ const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
 const isItNamedColor = (color) => namesAndRGBValues.hasOwnProperty(color);
 
 const shortToFullHex = (hexColor) => {
-  return [...hexColor].map((x, index) => (index != 0 ? x + x : x)).join("");
+  // hexColor = "#FFFFFF"
+  // The "#" character needs to be removed
+  // It can be done by using Array.slice() method
+  return [...hexColor]
+    .slice(1)
+    .map((x, index) => x + x)
+    .join("");
 };
 
 const hexToRGB = (hexColor) => {
@@ -189,63 +195,60 @@ const displayChecks = () => {
   }
 };
 
-const displayRatioResult = () => {
-  let firstColor = foregroundColor.value;
-  let secondColor = backgroundColor.value;
+/**
+ * This function takes a value representing a color
+ * and returns an array of its RGB values.
+ * Accepted formats:
+ * - HEX format: color = "#FFF" | "#FFFFFF"
+ * - HSL format: color = "hsl(240, 100%, 50%)"
+ * - RGB format: color = rgb(100, 1, 233)
+ * - Named format: color = "white" | "chocolate"
+ *
+ * @param {String} color The color representation.
+ *
+ * @return {Array|null} RGB representation of the color eg. `[255, 0, 127]`
+ * or `null` when an incorrect format was provided or when color name
+ * could not be found.
+ */
+const getRGBfromColor = (color) => {
+  color = color.trim().toLowerCase();
 
-  // CASE two Hexes
-  if (/^#.*/.test(firstColor) && /^#.*/.test(secondColor)) {
-    if (firstColor.length === 7 && secondColor.length === 7) {
-      if (hexRegex.test(firstColor) && hexRegex.test(secondColor)) {
-        ratioResult.innerHTML = colorFormatRatio(
-          firstColor,
-          secondColor,
-          hexToRGB
-        );
-      }
-    }
-    if (firstColor.length >= 7 && secondColor.length >= 7) {
-      if (!hexRegex.test(firstColor) || !hexRegex.test(secondColor)) {
-        showErrorMessage(warning);
-      }
-    } else if (firstColor.length < 7 || secondColor.length < 7) {
-      ratioResult.innerHTML = "";
-    }
-    if (hexRegex3Digit.test(firstColor) && hexRegex3Digit.test(secondColor)) {
-      ratioResult.innerHTML = colorFormatRatio(
-        shortToFullHex(firstColor),
-        shortToFullHex(secondColor),
-        hexToRGB
-      );
-    }
-  } else if (isNotEmpty(firstColor) && isNotEmpty(secondColor)) {
-    // CASE two RGBs
-    if (isValidRGB(firstColor) && isValidRGB(secondColor)) {
-      ratioResult.innerHTML = colorFormatRatio(
-        firstColor,
-        secondColor,
-        rgbInputToRGBNumbers
-      );
-    }
-    //CASE two named colors
-    else if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
-      ratioResult.innerHTML = calculateRatio(
-        namesAndRGBValues[firstColor],
-        namesAndRGBValues[secondColor]
-      );
-    }
-    //CASE two HSL
-    else if (isValidHSL(firstColor) && isValidHSL(secondColor)) {
-      ratioResult.innerHTML = colorFormatRatio(
-        firstColor,
-        secondColor,
-        hslToRGB
-      );
-    } else {
-      showErrorMessage(warning);
-    }
+  // check if shorthand HEX
+  if (hexRegex3Digit.test(color)) {
+    return hexToRGB(shortToFullHex(color));
+  }
+  // check if full HEX
+  if (hexRegex.test(color)) {
+    return hexToRGB(color);
+  }
+  // check if HSL
+  if (isValidHSL(color)) {
+    return hslToRGB(color);
+  }
+  // check if RGB
+  if (isValidRGB(color)) {
+    return rgbInputToRGBNumbers(color);
+  }
+  // check if named color
+  if (color in namesAndRGBValues) {
+    return namesAndRGBValues[color];
+  }
+  // invalid format or name
+  return null;
+};
+
+const displayRatioResult = () => {
+  // convert both color name representations to their
+  // respective RGB values
+  let fgColor = getRGBfromColor(foregroundColor.value);
+  let bgColor = getRGBfromColor(backgroundColor.value);
+  // check if both colors where coverted successfully
+  if (fgColor != null && bgColor != null) {
+    // success, calculate and display result
+    ratioResult.innerHTML = calculateRatio(fgColor, bgColor);
   } else {
-    showErrorMessage(info);
+    // failure, display warning
+    showErrorMessage(warning);
   }
 };
 
