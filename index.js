@@ -12,10 +12,15 @@ const graphicsAA = document.getElementById("graphicsAA");
 const hexRegex = /^#([A-Fa-f0-9]{6})$/;
 const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
 
-const isItNamedColor = (color) => namesAndRGBValues.hasOwnProperty(color);
+const isNamedColor = (color) => namesAndRGBValues.hasOwnProperty(color);
+
+const nameToRGB = (name) => namesAndRGBValues[name];
 
 const shortToFullHex = (hexColor) => {
-  return [...hexColor].map((x, index) => (index != 0 ? x + x : x)).join("");
+  return [...hexColor]
+    .slice(1)
+    .map((x) => x + x)
+    .join("");
 };
 
 const hexToRGB = (hexColor) => {
@@ -108,12 +113,6 @@ const calculateRatio = (color1, color2) => {
   return ((lighterLum + 0.05) / (darkerLum + 0.05)).toFixed(2);
 };
 
-const colorFormatRatio = (color1, color2, convertRatio) => {
-  const RGBColor1 = convertRatio(color1);
-  const RGBColor2 = convertRatio(color2);
-  return calculateRatio(RGBColor1, RGBColor2);
-};
-
 const isValidRGB = (color) => {
   const rgbRegex = /^rgb\(\s?\d{1,3},\s?\d{1,3},\s?\d{1,3}\)$/i;
   if (rgbRegex.test(color)) {
@@ -153,7 +152,7 @@ const updateSwatchColor = (swatch, color) => {
     isValidRGB(color) ||
     isValidHSL(color) ||
     hexRegex3Digit.test(color) ||
-    isItNamedColor(color)
+    isNamedColor(color)
   ) {
     swatch.style.backgroundColor = color;
   }
@@ -190,89 +189,90 @@ const displayChecks = () => {
 };
 const setTextStatus = (element, className, text) => {
   element.classList.add(className);
-  element.innerText = text
+  element.innerText = text;
 };
 const handleTextStatus = () => {
-  let contrastScore = ratioResult.innerText
-  let checkIcon = document.querySelectorAll(".checks")
-  if(contrastScore == 0) {
-    checkIcon.forEach(item => resetCheck(item))
-  }else{
-    checkIcon.forEach(item => {
-      if(contrastScore >= 3 && contrastScore < 4.5) {
-        item.classList.contains("AA-large") ?
-          setTextStatus(item,"pass", "Pass"): 
-          setTextStatus(item,"fail", "Fail");
-        }else if(contrastScore >= 4.5 && contrastScore < 7) {
-        item.classList.contains("AAA-small") ?
-          setTextStatus(item,"fail", "Fail"):
-          setTextStatus(item,"pass", "Pass");
-        }else if(contrastScore >= 7){
-        setTextStatus(item,"pass", "Pass");
-      }else {
-        setTextStatus(item,"fail", "Fail");
-      };   
-      });
-    };
-  };
+  let contrastScore = ratioResult.innerText;
+  let checkIcon = document.querySelectorAll(".checks");
+  if (contrastScore == 0) {
+    checkIcon.forEach((item) => resetCheck(item));
+  } else {
+    checkIcon.forEach((item) => {
+      if (contrastScore >= 3 && contrastScore < 4.5) {
+        item.classList.contains("AA-large")
+          ? setTextStatus(item, "pass", "Pass")
+          : setTextStatus(item, "fail", "Fail");
+      } else if (contrastScore >= 4.5 && contrastScore < 7) {
+        item.classList.contains("AAA-small")
+          ? setTextStatus(item, "fail", "Fail")
+          : setTextStatus(item, "pass", "Pass");
+      } else if (contrastScore >= 7) {
+        setTextStatus(item, "pass", "Pass");
+      } else {
+        setTextStatus(item, "fail", "Fail");
+      }
+    });
+  }
+};
+
+/**
+ * This function takes a value representing a color
+ * and returns an array of its RGB values.
+ * Accepted formats:
+ * - HEX format: color = "#FFF" | "#FFFFFF"
+ * - HSL format: color = "hsl(240, 100%, 50%)"
+ * - RGB format: color = rgb(100, 1, 233)
+ * - Named format: color = "white" | "chocolate"
+ *
+ * @param {String} color The color representation.
+ *
+ * @return {Array|null} RGB representation of the color eg. `[255, 0, 127]`
+ * or `null` when an incorrect format was provided or when color name
+ * could not be found.
+ */
+const getRGBfromColor = (color) => {
+  color = color.trim().toLowerCase();
+
+  if (hexRegex3Digit.test(color)) {
+    return hexToRGB(shortToFullHex(color));
+  }
+
+  if (hexRegex.test(color)) {
+    return hexToRGB(color);
+  }
+
+  if (isValidHSL(color)) {
+    return hslToRGB(color);
+  }
+
+  if (isValidRGB(color)) {
+    return rgbInputToRGBNumbers(color);
+  }
+
+  if (isNamedColor(color)) {
+    return nameToRGB(color);
+  }
+  // invalid format or name
+  return null;
+};
 
 const displayRatioResult = () => {
-  let firstColor = foregroundColor.value;
-  let secondColor = backgroundColor.value;
+  // stop, when any of the two inputs is empty
+  if (!(foregroundColor.value && backgroundColor.value)) {
+    // however, display info message when one input is given
+    if (foregroundColor.value || backgroundColor.value) {
+      showErrorMessage(info);
+    }
+    return;
+  }
 
-  // CASE two Hexes
-  if (/^#.*/.test(firstColor) && /^#.*/.test(secondColor)) {
-    if (firstColor.length === 7 && secondColor.length === 7) {
-      if (hexRegex.test(firstColor) && hexRegex.test(secondColor)) {
-        ratioResult.innerHTML = colorFormatRatio(
-          firstColor,
-          secondColor,
-          hexToRGB
-        );
-      }
-    }
-    if (firstColor.length >= 7 && secondColor.length >= 7) {
-      if (!hexRegex.test(firstColor) || !hexRegex.test(secondColor)) {
-        showErrorMessage(warning);
-      }
-    } else if (firstColor.length < 7 || secondColor.length < 7) {
-      ratioResult.innerHTML = "";
-    }
-    if (hexRegex3Digit.test(firstColor) && hexRegex3Digit.test(secondColor)) {
-      ratioResult.innerHTML = colorFormatRatio(
-        shortToFullHex(firstColor),
-        shortToFullHex(secondColor),
-        hexToRGB
-      );
-    }
-  } else if (isNotEmpty(firstColor) && isNotEmpty(secondColor)) {
-    // CASE two RGBs
-    if (isValidRGB(firstColor) && isValidRGB(secondColor)) {
-      ratioResult.innerHTML = colorFormatRatio(
-        firstColor,
-        secondColor,
-        rgbInputToRGBNumbers
-      );
-    }
-    //CASE two named colors
-    else if (isItNamedColor(firstColor) && isItNamedColor(secondColor)) {
-      ratioResult.innerHTML = calculateRatio(
-        namesAndRGBValues[firstColor],
-        namesAndRGBValues[secondColor]
-      );
-    }
-    //CASE two HSL
-    else if (isValidHSL(firstColor) && isValidHSL(secondColor)) {
-      ratioResult.innerHTML = colorFormatRatio(
-        firstColor,
-        secondColor,
-        hslToRGB
-      );
-    } else {
-      showErrorMessage(warning);
-    }
+  let fgColor = getRGBfromColor(foregroundColor.value);
+  let bgColor = getRGBfromColor(backgroundColor.value);
+
+  if (fgColor !== null && bgColor !== null) {
+    ratioResult.innerHTML = calculateRatio(fgColor, bgColor);
   } else {
-    showErrorMessage(info);
+    showErrorMessage(warning);
   }
 };
 
@@ -281,13 +281,13 @@ const handleChange = () => {
   clearErrors();
   displayColor();
   resetCheck(graphicsAA);
-  handleTextStatus()
+  handleTextStatus();
 };
 
 const displayResult = () => {
   displayRatioResult();
   displayChecks();
-  handleTextStatus()
+  handleTextStatus();
 };
 
 foregroundColor.oninput = handleChange;
