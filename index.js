@@ -12,12 +12,14 @@ const graphicsAA = document.getElementById("graphicsAA");
 const hexRegex = /^#([A-Fa-f0-9]{6})$/;
 const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
 
-const isItNamedColor = (color) => namesAndRGBValues.hasOwnProperty(color);
+const isNamedColor = (color) => namesAndRGBValues.hasOwnProperty(color);
+
+const nameToRGB = (name) => namesAndRGBValues[name];
 
 const shortToFullHex = (hexColor) => {
   return [...hexColor]
     .slice(1)
-    .map((x, index) => x + x)
+    .map((x) => x + x)
     .join("");
 };
 
@@ -111,12 +113,6 @@ const calculateRatio = (color1, color2) => {
   return ((lighterLum + 0.05) / (darkerLum + 0.05)).toFixed(2);
 };
 
-const colorFormatRatio = (color1, color2, convertRatio) => {
-  const RGBColor1 = convertRatio(color1);
-  const RGBColor2 = convertRatio(color2);
-  return calculateRatio(RGBColor1, RGBColor2);
-};
-
 const isValidRGB = (color) => {
   const rgbRegex = /^rgb\(\s?\d{1,3},\s?\d{1,3},\s?\d{1,3}\)$/i;
   if (rgbRegex.test(color)) {
@@ -156,7 +152,7 @@ const updateSwatchColor = (swatch, color) => {
     isValidRGB(color) ||
     isValidHSL(color) ||
     hexRegex3Digit.test(color) ||
-    isItNamedColor(color)
+    isNamedColor(color)
   ) {
     swatch.style.backgroundColor = color;
   }
@@ -193,31 +189,31 @@ const displayChecks = () => {
 };
 const setTextStatus = (element, className, text) => {
   element.classList.add(className);
-  element.innerText = text
+  element.innerText = text;
 };
 const handleTextStatus = () => {
-  let contrastScore = ratioResult.innerText
-  let checkIcon = document.querySelectorAll(".checks")
-  if(contrastScore == 0) {
-    checkIcon.forEach(item => resetCheck(item))
-  }else{
-    checkIcon.forEach(item => {
-      if(contrastScore >= 3 && contrastScore < 4.5) {
-        item.classList.contains("AA-large") ?
-          setTextStatus(item,"pass", "Pass"): 
-          setTextStatus(item,"fail", "Fail");
-        }else if(contrastScore >= 4.5 && contrastScore < 7) {
-        item.classList.contains("AAA-small") ?
-          setTextStatus(item,"fail", "Fail"):
-          setTextStatus(item,"pass", "Pass");
-        }else if(contrastScore >= 7){
-        setTextStatus(item,"pass", "Pass");
-      }else {
-        setTextStatus(item,"fail", "Fail");
-      };   
-      });
-    };
-  };
+  let contrastScore = ratioResult.innerText;
+  let checkIcon = document.querySelectorAll(".checks");
+  if (contrastScore == 0) {
+    checkIcon.forEach((item) => resetCheck(item));
+  } else {
+    checkIcon.forEach((item) => {
+      if (contrastScore >= 3 && contrastScore < 4.5) {
+        item.classList.contains("AA-large")
+          ? setTextStatus(item, "pass", "Pass")
+          : setTextStatus(item, "fail", "Fail");
+      } else if (contrastScore >= 4.5 && contrastScore < 7) {
+        item.classList.contains("AAA-small")
+          ? setTextStatus(item, "fail", "Fail")
+          : setTextStatus(item, "pass", "Pass");
+      } else if (contrastScore >= 7) {
+        setTextStatus(item, "pass", "Pass");
+      } else {
+        setTextStatus(item, "fail", "Fail");
+      }
+    });
+  }
+};
 
 /**
  * This function takes a value representing a color
@@ -240,7 +236,7 @@ const getRGBfromColor = (color) => {
   if (hexRegex3Digit.test(color)) {
     return hexToRGB(shortToFullHex(color));
   }
-  
+
   if (hexRegex.test(color)) {
     return hexToRGB(color);
   }
@@ -253,21 +249,27 @@ const getRGBfromColor = (color) => {
     return rgbInputToRGBNumbers(color);
   }
 
-  if (color in namesAndRGBValues) {
-    return namesAndRGBValues[color];
+  if (isNamedColor(color)) {
+    return nameToRGB(color);
   }
   // invalid format or name
   return null;
 };
 
 const displayRatioResult = () => {
-  // do nothing when any of the two inputs is empty
-  if (!(foregroundColor.value && backgroundColor.value)) return
+  // stop, when any of the two inputs is empty
+  if (!(foregroundColor.value && backgroundColor.value)) {
+    // however, display info message when one input is given
+    if (foregroundColor.value || backgroundColor.value) {
+      showErrorMessage(info);
+    }
+    return;
+  }
 
   let fgColor = getRGBfromColor(foregroundColor.value);
   let bgColor = getRGBfromColor(backgroundColor.value);
-  
-  if (fgColor != null && bgColor != null) {
+
+  if (fgColor !== null && bgColor !== null) {
     ratioResult.innerHTML = calculateRatio(fgColor, bgColor);
   } else {
     showErrorMessage(warning);
@@ -279,13 +281,13 @@ const handleChange = () => {
   clearErrors();
   displayColor();
   resetCheck(graphicsAA);
-  handleTextStatus()
+  handleTextStatus();
 };
 
 const displayResult = () => {
   displayRatioResult();
   displayChecks();
-  handleTextStatus()
+  handleTextStatus();
 };
 
 foregroundColor.oninput = handleChange;
