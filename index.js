@@ -1,4 +1,5 @@
 import { namesAndRGBValues } from "./helpers.js";
+import { testContrastRatio, testConversion, RUN_TESTS } from "./tests.js";
 
 const foregroundColor = document.getElementById("foreground-color");
 const backgroundColor = document.getElementById("background-color");
@@ -110,7 +111,7 @@ const calculateRatio = (color1, color2) => {
     L2 is the relative luminance of the darker of the colors. */
   let lighterLum = Math.max(color1Luminance, color2Luminance);
   let darkerLum = Math.min(color1Luminance, color2Luminance);
-  return ((lighterLum + 0.05) / (darkerLum + 0.05)).toFixed(2);
+  return Number(((lighterLum + 0.05) / (darkerLum + 0.05)).toFixed(2));
 };
 
 const isValidRGB = (color) => {
@@ -296,3 +297,10 @@ foregroundColor.onblur = displayResult;
 backgroundColor.onblur = displayResult;
 
 document.querySelector("#copyright").innerText = new Date().getFullYear();
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (RUN_TESTS) {
+    testConversion(getRGBfromColor);
+    testContrastRatio(calculateRatio, getRGBfromColor);
+  }
+});
