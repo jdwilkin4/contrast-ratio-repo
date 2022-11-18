@@ -199,11 +199,6 @@ footer p {
   width: 3rem;
 }
 
-.checks {
-  margin: 1rem 0;
-  display: flex;
-  justify-content: space-around;
-}
 .input-items {
   display: flex;
   align-items: center;
@@ -322,24 +317,25 @@ small {
   .input-items {
     align-self: center;
   }
-   .checks-field {
+  .checks-field {
     flex-direction: row;
     align-items: flex-start;
     gap: 1rem;
     padding-right: 40px;
     margin-left: -10px;
   }
-   .result-row {
+  .result-row {
     flex-direction: row;
     align-items: flex-start;
-  } 
-  .checks-container {
-    display: flex;
   }
 }
 
-@media(max-width: 768px) {
-  .checks-container {
-    display: flex;
-  }
+.checks-container {
+  display: flex;
+}
+
+.checks-container span {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-around;
 }

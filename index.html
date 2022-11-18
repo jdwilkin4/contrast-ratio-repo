@@ -77,42 +77,36 @@
                   <p id="contrast-ratio-result" class="large"></p>
                 </div>
               </div>
-              <div class="checks-field">
+              <div id="text-sm" class="checks-field">
                 <div class="check-result">
-                  <div>
-                    <h3 class="text-small">Small Text</h3>
-                    <div class="level-labels">
-                      <span class="level">AA+</span>
-                      <span class="level">AAA+</span>
-                    </div>
-                    <div class="checks-container">
-                      <span class="checks AA-small"></span>
-                      <span class="checks AAA-small"></span>
-                    </div>
+                  <h3 class="text-small">Small Text</h3>
+                  <div class="level-labels">
+                    <span class="level">AA+</span>
+                    <span class="level">AAA+</span>
+                  </div>
+                  <div class="checks-container">
+                    <span id="text-sm-double"></span>
+                    <span id="text-sm-triple"></span>
                   </div>
                 </div>
-                <div class="check-result">
-                  <div>
-                    <h3 class="text-small">Large Text</h3>
-                    <div class="level-labels">
-                      <span class="level">AA+</span>
-                      <span class="level">AAA+</span>
-                    </div>
-                    <div class="checks-container">
-                      <span class="checks AA-large"></span>
-                      <span class="checks AAA-large"></span>
-                    </div>
+                <div id="text-lg" class="check-result">
+                  <h3 class="text-small">Large Text</h3>
+                  <div class="level-labels">
+                    <span class="level">AA+</span>
+                    <span class="level">AAA+</span>
+                  </div>
+                  <div class="checks-container">
+                    <span id="text-lg-double"></span>
+                    <span id="text-lg-triple"></span>
                   </div>
                 </div>
-                <div class="check-result">
-                  <div>
-                    <h3 class="text-small">Graphics</h3>
-                    <div class="level-labels">
-                      <span class="level">AA+</span>
-                    </div>
-                    <div class="checks">
-                      <span id="graphicsAA"></span>
-                    </div>
+                <div id="graphics" class="check-result">
+                  <h3 class="text-small">Graphics</h3>
+                  <div class="level-labels">
+                    <span class="level">AA+</span>
+                  </div>
+                  <div class="checks-container">
+                    <span id="graphics-double"></span>
                   </div>
                 </div>
               </div>
@@ -177,7 +171,9 @@
         <p>Copyright &copy; <span id="copyright"></span></p>
       </div>
     </footer>
-
+    <!-- Order matters -->
+    <script type="module" src="./colors.js"></script>
+    <script type="module" src="./helpers.js"></script>
     <script type="module" src="./index.js"></script>
   </body>
 </html>
