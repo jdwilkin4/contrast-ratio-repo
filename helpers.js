@@ -9,9 +9,9 @@ const nameToRGB = (name) => colors[name];
 
 const shortToFullHex = (hexColor) => {
   return [...hexColor]
-    .slice(1)
     .map((x) => x + x)
-    .join("");
+    .join("")
+    .slice(1);
 };
 
 const hexToRGB = (hexColor) => {
