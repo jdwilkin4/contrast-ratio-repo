@@ -93,6 +93,15 @@ const getLuminance = (RGBarray) => {
   return luminance;
 };
 
+/**
+ * This function takes two RGB[int, int, int] values
+ * and calculates their contrast ratio
+ *
+ * @param {RGB} color1 The color representation in RGB.
+ * @param {RGB} color2 The color representation in RGB.
+ *
+ * @return {float} Contrast ratio of the two given colors.
+ */
 const calculateRatio = (color1, color2) => {
   const color1Luminance = getLuminance(color1);
   const color2Luminance = getLuminance(color2);

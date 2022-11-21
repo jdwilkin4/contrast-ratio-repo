@@ -1,4 +1,4 @@
-import { textToRGB } from "./helpers";
+import { textToRGB } from "../helpers";
 
 const RGBtestCases = [
   // [Case, Value, Expected result]
