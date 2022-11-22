@@ -24,11 +24,6 @@ const hideMessage = (div) => {
   div.classList.add("hidden");
 };
 
-const clearMessages = () => {
-  hideMessage(warning);
-  hideMessage(info);
-};
-
 const updateSwatch = (el) => {
   if (textToRGB(el.value) !== null) {
     if (el === fgColorInput) {
@@ -46,7 +41,8 @@ const updateLabel = (el, clsName) => {
 };
 
 const handleChange = (e) => {
-  clearMessages();
+  hideMessage(warning);
+  hideMessage(info);
   updateSwatch(e.currentTarget);
 };
 
