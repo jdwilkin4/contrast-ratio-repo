@@ -1,11 +1,11 @@
 import colors from "./colors.js";
 
-const hexRegex = /^#([A-Fa-f0-9]{6})$/;
-const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
+export const hexRegex = /^#([A-Fa-f0-9]{6})$/;
+export const hexRegex3Digit = /^#[a-fA-F0-9]{3}$/;
 
-const isNamedColor = (color) => colors.hasOwnProperty(color);
+export const isNamedColor = (color) => colors.hasOwnProperty(color);
 
-const nameToRGB = (name) => colors[name];
+export const nameToRGB = (name) => colors[name];
 
 const shortToFullHex = (hexColor) => {
   return [...hexColor]
@@ -14,14 +14,14 @@ const shortToFullHex = (hexColor) => {
     .slice(1);
 };
 
-const hexToRGB = (hexColor) => {
+export const hexToRGB = (hexColor) => {
   const R = parseInt(hexColor.slice(1, 3), 16);
   const G = parseInt(hexColor.slice(3, 5), 16);
   const B = parseInt(hexColor.slice(5), 16);
   return [R, G, B];
 };
 
-const rgbInputToRGBNumbers = (rgbColor) => {
+export const rgbInputToRGBNumbers = (rgbColor) => {
   const [R, G, B] = rgbColor
     .replace(/[^\d,]/g, "")
     .split(",")
@@ -36,7 +36,7 @@ const hslNumbers = (hslColor) => {
     .map((el) => Number(el));
 };
 
-const hslToRGB = (hslColor) => {
+export const hslToRGB = (hslColor) => {
   const dataForCalculation = hslNumbers(hslColor).map((hslValue, index) => {
     return index === 0 ? hslValue : hslValue / 100;
   });
@@ -102,7 +102,7 @@ const getLuminance = (RGBarray) => {
  *
  * @return {float} Contrast ratio of the two given colors.
  */
-const calculateRatio = (color1, color2) => {
+export const calculateRatio = (color1, color2) => {
   const color1Luminance = getLuminance(color1);
   const color2Luminance = getLuminance(color2);
   /* (L1 + 0.05) / (L2 + 0.05), whereby:
@@ -113,14 +113,14 @@ const calculateRatio = (color1, color2) => {
   return (lighterLum + 0.05) / (darkerLum + 0.05);
 };
 
-const isValidRGB = (color) => {
+export const isValidRGB = (color) => {
   const rgbRegex = /^rgb\(\s?\d{1,3},\s?\d{1,3},\s?\d{1,3}\)$/i;
   if (rgbRegex.test(color)) {
     return rgbInputToRGBNumbers(color).every((v) => 0 <= v && v <= 255);
   } else return false;
 };
 
-const isValidHSL = (color) => {
+export const isValidHSL = (color) => {
   const hslRegex = /^hsl\s?\(\s?\d{1,3},\s?\d{1,3}%,\s?\d{1,3}%\)$/i;
   if (hslRegex.test(color)) {
     return hslNumbers(color).every((item, index) => {
@@ -144,7 +144,7 @@ const isValidHSL = (color) => {
  * or `null` when an incorrect format was provided or when color name
  * could not be found.
  */
-const textToRGB = (color) => {
+export const textToRGB = (color) => {
   color = color.trim().toLowerCase();
 
   if (hexRegex3Digit.test(color)) {
@@ -170,11 +170,9 @@ const textToRGB = (color) => {
   return null;
 };
 
-const $ = (selector, all = false) => {
+export const $ = (selector, all = false) => {
   if (all) {
     return document.querySelectorAll(selector);
   }
   return document.querySelector(selector);
 };
-
-export { textToRGB, calculateRatio, $ };
