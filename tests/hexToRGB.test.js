@@ -5,6 +5,11 @@ test("Valid HEX", () => {
   expect(hexRegex3Digit.test("#F0F")).toStrictEqual(true);
 });
 
+test("Invalid HEX", () => {
+  expect(hexRegex.test("#fffffx")).toStrictEqual(false);
+  expect(hexRegex3Digit.test("#ffx")).toStrictEqual(false);
+});
+
 test("Only hashtag", () => {
   expect(hexRegex.test("#")).toStrictEqual(false);
   expect(hexRegex3Digit.test("#")).toStrictEqual(false);
