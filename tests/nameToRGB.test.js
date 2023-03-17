@@ -5,7 +5,7 @@ test("Valid name", () => {
 });
 
 test("Invalid name", () => {
-  expect(isNamedColor("hashbrown")).toStrictEqual(false);
+  expect(isNamedColor("xxxxx")).toStrictEqual(false);
 });
 
 test("Valid name 'black'", () => {
