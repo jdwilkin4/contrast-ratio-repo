@@ -20,101 +20,73 @@
               Contrast &nbsp;&nbsp;Ratio&nbsp;&nbsp; Calculator
             </h1>
             <p class="description">
-              Please provide two Hex, RGB, HSL or named color values to see the
-              contrast ratio result.
+              Please choose two colors to see the contrast ratio result.
             </p>
           </div>
-          <div class="result-field">
-            <div class="inputs-row">
-              <div class="input-fields">
-                <div>
-                  <label for="foreground-color">Foreground color</label>
-                </div>
-                <div class="input-items">
-                  <div id="swatch-one" class="swatch-one"></div>
-                  <input
-                    id="foreground-color"
-                    name="foreground-color"
-                    type="text"
-                    placeholder="#FFFFFF"
-                  />
-                </div>
+          <div class="option-tabs">
+            <button class="">Foreground</button>
+            <button class="active">Background</button>
+          </div>
+          <div class="dashboard">
+            <div class="color-picker">
+              <!-- Place gradient slider here -->
+            </div>
+            <div class="color-search">
+              <input
+                type="text"
+                class="color-text"
+                placeholder="Enter a color here"
+              />
+              <div class="color-names">
+                <!-- named colors received from search -->
+                <button
+                  class="search-result"
+                  style="background-color: aliceblue"
+                >
+                  Alice Blue
+                </button>
+                <button
+                  class="search-result"
+                  style="background-color: antiquewhite"
+                >
+                  Antique White
+                </button>
+                <button class="search-result" style="background-color: aqua">
+                  Aqua
+                </button>
+                <button
+                  class="search-result"
+                  style="background-color: aquamarine"
+                >
+                  Aquamarine
+                </button>
+                <button class="search-result" style="background-color: azure">
+                  Azure
+                </button>
+                <button class="search-result" style="background-color: beige">
+                  Beige
+                </button>
               </div>
-              <div class="input-fields">
-                <div>
-                  <label for="background-color">Background color</label>
-                </div>
-                <div class="input-items">
-                  <div id="swatch-two" class="swatch-two"></div>
-                  <input
-                    id="background-color"
-                    name="background-color"
-                    type="text"
-                    placeholder="#000000"
-                  />
-                </div>
-              </div>
             </div>
-            <div id="warning-box" class="error-box hidden">
-              <p class="error-text">
-                <i class="fas fa-exclamation-triangle"></i>
-                Invalid Input. Please check our
-                <a href="#How-does-it-work">How does it work?</a> for valid
-                color formats.
-              </p>
-            </div>
-            <div id="info-box" class="error-box hidden">
-              <p class="error-text">
-                <i class="fa fa-info-circle"></i>
-                Please make sure to fill both inputs with a valid color.
-              </p>
-            </div>
-            <h2 class="sr-only">Results</h2>
-            <div class="result-row">
+            <div class="outputs">
+              <div class="example small-text">Small text</div>
+              <div class="result pass">AAA</div>
+              <div class="result fail">AAA</div>
+              <div class="example large-text">Large text</div>
+              <div class="result pass">AAA</div>
+              <div class="result fail">AAA</div>
+              <!-- TODO: find a suitable icon for the graphics exapmle -->
+              <div class="example graphics">Graphics</div>
+              <div class="result pass">AAA</div>
+              <div class="result fail">AAA</div>
               <div class="ratio-result">
-                <div>
-                  <h3 class="text-small">Contrast Ratio</h3>
-                  <p id="contrast-ratio-result" class="large"></p>
-                </div>
-              </div>
-              <div id="text-sm" class="checks-field">
-                <div class="check-result">
-                  <h3 class="text-small">Small Text</h3>
-                  <div class="level-labels">
-                    <span class="level">AA+</span>
-                    <span class="level">AAA+</span>
-                  </div>
-                  <div class="checks-container">
-                    <span id="text-sm-double"></span>
-                    <span id="text-sm-triple"></span>
-                  </div>
-                </div>
-                <div id="text-lg" class="check-result">
-                  <h3 class="text-small">Large Text</h3>
-                  <div class="level-labels">
-                    <span class="level">AA+</span>
-                    <span class="level">AAA+</span>
-                  </div>
-                  <div class="checks-container">
-                    <span id="text-lg-double"></span>
-                    <span id="text-lg-triple"></span>
-                  </div>
-                </div>
-                <div id="graphics" class="check-result">
-                  <h3 class="text-small">Graphics</h3>
-                  <div class="level-labels">
-                    <span class="level">AA+</span>
-                  </div>
-                  <div class="checks-container">
-                    <span id="graphics-double"></span>
-                  </div>
-                </div>
+                <h3>Contrast Ratio</h3>
+                1.6
               </div>
             </div>
           </div>
         </div>
       </section>
-
       <section class="secondary">
         <div class="container">
           <h2 id="How-does-it-work" class="letter-spacing">
